@@ -12,4 +12,5 @@ export class BaseChart {
         return this.chartRef;
     }
 
+    
 }
