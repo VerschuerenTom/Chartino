@@ -1,4 +1,8 @@
+export type Margin = {top: number, right: number, bottom: number, left: number};
+
 export class ChartDimensions {
+
+
 
     private margin = {
         top: 0,
@@ -7,7 +11,7 @@ export class ChartDimensions {
         left: 0
     }
 
-    constructor(margin){
+    constructor(margin: Margin){
         this.margin = margin
     }
 

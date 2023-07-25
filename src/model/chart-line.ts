@@ -2,10 +2,15 @@ import { Color } from "./color";
 
 export class ChartLine{
 
-    private data: [Date, number];
+    private data: number[][];
     private color: Color = "#000000"
 
-    constructor(data: [Date, number]){
+    constructor(data: number[][]){
             this.data = data;
     }
+
+    public setColor(color: Color){
+        this.color = color;
+    }
+
 }
