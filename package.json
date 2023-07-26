@@ -1,6 +1,6 @@
 {
   "name": "chartino",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Coming soon! Simple timeseries library",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,8 @@
   "homepage": "https://github.com/VerschuerenTom/Chartino#readme",
   "devDependencies": {
     "@types/d3": "^7.4.0",
-    "@types/node": "^20.4.4"
+    "@types/node": "^20.4.4",
+    "cypress": "^12.17.2"
   },
   "dependencies": {
     "d3": "^7.8.5"
