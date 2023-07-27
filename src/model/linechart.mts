@@ -1,8 +1,8 @@
-import { drawLineChart } from "../controller/chart-controller";
-import { BaseChart } from "./basechart";
-import { ChartLine } from "./chart-line";
-import { HorizontalAxis, defaultHorizontalAxis } from "./horizontal-axis";
-import { VerticalAxis, defaultVerticalAxis } from "./vertical-axis";
+import { drawLineChart } from "../controller/chart-controller.js";
+import { BaseChart } from "./basechart.js";
+import { ChartLine } from "./chart-line.mjs";
+import { HorizontalAxis, defaultHorizontalAxis } from "./horizontal-axis.js";
+import { VerticalAxis, defaultVerticalAxis } from "./vertical-axis.js";
 
 export class LineChart extends BaseChart{
 
@@ -10,8 +10,8 @@ export class LineChart extends BaseChart{
     private horizontalAxis: HorizontalAxis = defaultHorizontalAxis
     private verticalAxis: VerticalAxis = defaultVerticalAxis
 
-    constructor(id: string, chartRef: any){
-        super(id, chartRef)
+    constructor(id: string){
+        super(id)
     }
 
     public addChartLine(chartLine: ChartLine){

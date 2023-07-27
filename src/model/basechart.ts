@@ -1,15 +1,29 @@
 export class BaseChart {
 
-    private chartRef;
     private id;
 
-    constructor(id: string, chartRef: any){
+    constructor(id: string){
         this.id = id;
-        this.chartRef = chartRef
     }
 
-    public getChartRef(){
-        return this.chartRef;
+    public getClientHeight(): number{
+        return this.getElement().clientHeight;
+    }
+
+    public getClientWidth(): number{
+        return this.getElement().clientWidth
+    }
+
+    private getElement() {
+        const el = document.getElementById(this.id);
+        if (el == undefined) {
+            throw new Error("Element with id " + this.id + "not found");
+        }
+        return el;
+    }
+
+    public getId(): string{
+        return this.id;
     }
 
     

@@ -1,0 +1,1 @@
+{"version":3,"file":"chart-dimensions.d.ts","sourceRoot":"","sources":["../../src/model/chart-dimensions.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,MAAM,GAAG;IAAC,GAAG,EAAE,MAAM,CAAC;IAAC,KAAK,EAAE,MAAM,CAAC;IAAC,MAAM,EAAE,MAAM,CAAC;IAAC,IAAI,EAAE,MAAM,CAAA;CAAC,CAAC;AAEhF,qBAAa,eAAe;IAIxB,OAAO,CAAC,MAAM,CAKb;gBAEW,MAAM,EAAE,MAAM;CAI7B"}

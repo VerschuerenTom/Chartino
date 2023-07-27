@@ -1,0 +1,1 @@
+{"version":3,"file":"chart-structure.d.ts","sourceRoot":"","sources":["../../src/model/chart-structure.ts"],"names":[],"mappings":"AAAA,qBAAa,cAAc;IAEvB,OAAO,CAAC,GAAG,CAAM;IACjB,OAAO,CAAC,UAAU,CAAM;gBAEZ,GAAG,EAAE,GAAG;IAIb,aAAa,CAAC,UAAU,EAAE,GAAG;IAI7B,MAAM;CAGhB"}
