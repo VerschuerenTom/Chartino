@@ -1,8 +1,10 @@
-export class HorizontalAxis{
+import { BaseAxis } from "./base-axis.js";
 
-    constructor(){
+type Margin = {top:number, bottom:number, right:number, left:number};
 
-    }
-}
+
+export class HorizontalAxis extends BaseAxis{
+
+};
 
 export const defaultHorizontalAxis = new HorizontalAxis();

@@ -1,8 +1,7 @@
-export class VerticalAxis{
+import { BaseAxis } from "./base-axis.js";
 
-    constructor(){
+export class VerticalAxis extends BaseAxis{
 
-    }
 }
 
 export const defaultVerticalAxis = new VerticalAxis();
