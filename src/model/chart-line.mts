@@ -28,7 +28,7 @@ export class ChartLine{
         this._data = value;
     }
 
-    public get timeDomain(): Date[] | undefined {
+    public get timeDomain(): Date[] {
         return this._timeDomain;
     }
 

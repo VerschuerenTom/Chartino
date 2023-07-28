@@ -9,7 +9,7 @@ export const drawLines = (chartStructure, chart) => {
     const verticalScale = chart.verticalScale;
     lines.forEach(chartLine => {
         const line = d3.line()
-            .defined((d) => !isNaN(d[1]))
+            //.defined((d) => !isNaN(d[1]))
             .x((d, i) => {
             return timeScale(d[0]);
         })

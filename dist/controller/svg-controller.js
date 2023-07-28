@@ -6,7 +6,7 @@ export const initChartStructure = (lineChart) => {
         .attr("width", lineChart.getClientWidth())
         .attr("height", lineChart.getClientHeight());
     const chartStructure = new ChartStructure(svg, lineChart);
-    chartStructure.chartGroup = svg.append('g'); //TODO: Transform for horizontal and vertical axis.
+    chartStructure.chartGroup = svg.append('g');
     return chartStructure;
 };
 export const clearSvg = (id) => {

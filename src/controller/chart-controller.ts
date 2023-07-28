@@ -13,15 +13,24 @@ export const drawLineChart = (lineChart: LineChart) => {
     
     const chartlines: ChartLine[] = lineChart.getChartlines()
 
-
-
-    //TODO: fix for when we have multiple lines
-   lineChart.timeDomain = chartlines[0].timeDomain
-   lineChart.verticalDomain = chartlines[0].verticalDomain
-
-  drawAxes(chartStructure, lineChart)
-  drawLines(chartStructure, lineChart)
     
+    //TODO: fix for when we have multiple lines
+    calculateDomains();
+
+    drawAxes(chartStructure, lineChart)
+    drawLines(chartStructure, lineChart)
+    
+
+  function calculateDomains() {
+    lineChart.timeDomain = chartlines.map(line => line.timeDomain).reduce((a, b) => {
+      const minDate = a[0] < b[0] ? a[0] : b[0];
+      const maxDate = a[1] > b[1] ? a[1] : b[1];
+      return [minDate, maxDate];
+    });
+    lineChart.verticalDomain = chartlines.map(line => line.verticalDomain).reduce((a, b) => {
+      return [Math.min(a[0], b[0]), Math.max(a[1], b[1])];
+    });
+  }
 }
 
 

@@ -16,7 +16,7 @@ export const drawLines = (chartStructure: ChartStructure, chart:LineChart) => {
 
     lines.forEach(chartLine => {
         const line = d3.line()
-            .defined((d) => !isNaN(d[1]))
+            //.defined((d) => !isNaN(d[1]))
             .x((d, i) => {
             return timeScale(d[0]);
             })

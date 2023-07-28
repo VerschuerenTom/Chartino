@@ -12,7 +12,7 @@ export declare class ChartLine {
     constructor(data: LineData);
     get data(): LineData;
     set data(value: LineData);
-    get timeDomain(): Date[] | undefined;
+    get timeDomain(): Date[];
     get verticalDomain(): number[];
     get timestamps(): Date[];
     get dataEntries(): [string, number][];
