@@ -1,17 +1,13 @@
 import * as d3 from "d3";
 export class ChartLine {
     constructor(data) {
-        this.color = "#000000";
+        this._color = "#000000";
         this._verticalDomain = [0, 0];
         this._data = data;
-        const test = Object.keys(this._data).map(number => new Date(parseInt(number)));
-        console.log(test);
-        this._timeDomain = d3.extent(test);
-        console.log(this._timeDomain);
+        this._timestamps = Object.keys(this._data).map(number => new Date(parseInt(number)));
+        this._timeDomain = d3.extent(this.timestamps);
+        this._dataEntries = Object.entries(this._data);
         this._verticalDomain = d3.extent(Object.values(this._data)).map(number => number);
-    }
-    setColor(color) {
-        this.color = color;
     }
     get data() {
         return this._data;
@@ -24,5 +20,17 @@ export class ChartLine {
     }
     get verticalDomain() {
         return this._verticalDomain;
+    }
+    get timestamps() {
+        return this._timestamps;
+    }
+    get dataEntries() {
+        return this._dataEntries;
+    }
+    get color() {
+        return this._color;
+    }
+    set color(value) {
+        this._color = value;
     }
 }

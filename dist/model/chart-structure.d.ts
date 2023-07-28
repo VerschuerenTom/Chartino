@@ -1,10 +1,10 @@
 import { BaseChart } from "./basechart.js";
 export declare class ChartStructure {
-    private timeScale;
     private svg;
     private _chartGroup;
     private _horizontalAxisGroup;
     private _verticalAxisGroup;
+    private _linesGroup;
     private _chart;
     constructor(svg: any, baseChart: BaseChart);
     get chart(): BaseChart;
@@ -15,6 +15,8 @@ export declare class ChartStructure {
     set horizontalAxisGroup(value: any);
     get verticalAxisGroup(): any;
     set verticalAxisGroup(value: any);
+    get linesGroup(): any;
+    set linesGroup(value: any);
     getSvg(): any;
 }
 //# sourceMappingURL=chart-structure.d.ts.map

@@ -27,6 +27,12 @@ export class ChartStructure {
     set verticalAxisGroup(value) {
         this._verticalAxisGroup = value;
     }
+    get linesGroup() {
+        return this._linesGroup;
+    }
+    set linesGroup(value) {
+        this._linesGroup = value;
+    }
     getSvg() {
         return this.svg;
     }

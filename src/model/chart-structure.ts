@@ -2,13 +2,12 @@ import { BaseChart } from "./basechart.js";
 
 export class ChartStructure{
 
-    private timeScale: any;
-
     private svg: any;
 
     private _chartGroup: any;
     private _horizontalAxisGroup: any;
     private _verticalAxisGroup: any;
+    private _linesGroup: any;
 
     private _chart: BaseChart;
 
@@ -44,6 +43,12 @@ export class ChartStructure{
     }
     public set verticalAxisGroup(value: any) {
         this._verticalAxisGroup = value;
+    }
+    public get linesGroup(): any {
+        return this._linesGroup;
+    }
+    public set linesGroup(value: any) {
+        this._linesGroup = value;
     }
     
 
