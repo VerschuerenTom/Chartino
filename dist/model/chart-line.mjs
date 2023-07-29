@@ -24,6 +24,9 @@ export class ChartLine {
     get timestamps() {
         return this._timestamps;
     }
+    getValue(timestamp) {
+        return this._data[timestamp.getTime()]; //TODO: what if timestamp is not in array
+    }
     get dataEntries() {
         return this._dataEntries;
     }

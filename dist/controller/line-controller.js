@@ -7,25 +7,27 @@ export const drawLines = (chartStructure, chart) => {
         chartStructure.linesGroup = chartStructure.chartGroup.append("g");
     }
     chartStructure.linesGroup.selectAll("*").remove();
-    const lines = chart.getChartlines();
     const timeScale = chart.timeScale;
     const verticalScale = chart.verticalScale;
-    lines.forEach(chartLine => {
-        const line = d3.line()
-            .defined((d) => !isNaN(d[1]))
-            .x((d) => {
-            return timeScale(d[0]);
-        })
-            .y(function (d) {
-            console.log(verticalScale(d[1]));
-            return verticalScale(d[1]);
-        })
-            .curve(d3.curveLinear);
-        chartStructure.linesGroup
-            .append("path")
-            .attr("fill", "none")
-            .datum(chartLine.dataEntries)
-            .attr("d", line)
-            .attr("stroke", chartLine.color);
+    chart.getChartlines().forEach(chartLine => {
+        drawLine(timeScale, verticalScale, chartStructure, chartLine);
     });
 };
+function drawLine(timeScale, verticalScale, chartStructure, chartLine) {
+    const line = d3.line()
+        .defined((d) => !isNaN(d[1]))
+        .x((d) => {
+        return timeScale(d[0]);
+    })
+        .y(function (d) {
+        console.log(verticalScale(d[1]));
+        return verticalScale(d[1]);
+    })
+        .curve(d3.curveLinear);
+    chartStructure.linesGroup
+        .append("path")
+        .attr("fill", "none")
+        .datum(chartLine.dataEntries)
+        .attr("d", line)
+        .attr("stroke", chartLine.color);
+}

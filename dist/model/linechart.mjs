@@ -10,10 +10,21 @@ export class LineChart extends BaseChart {
         this._horizontalAxis = defaultHorizontalAxis;
         this._verticalAxis = defaultVerticalAxis;
         this._verticalDomain = [0, 0];
+        this._timestamps = [];
     }
     addChartLine(chartLine) {
         this.chartLines.push(chartLine);
+        this._timestamps = this._timestamps.concat(chartLine.timestamps);
         return this;
+    }
+    setTooltip(tooltip) {
+        this._tooltip = tooltip;
+    }
+    get tooltip() {
+        return this._tooltip;
+    }
+    set tooltip(value) {
+        this._tooltip = value;
     }
     getChartlines() {
         return this.chartLines;
@@ -61,6 +72,9 @@ export class LineChart extends BaseChart {
     }
     set verticalScale(value) {
         this._verticalScale = value;
+    }
+    get timestamps() {
+        return this._timestamps;
     }
     draw() {
         drawLineChart(this);

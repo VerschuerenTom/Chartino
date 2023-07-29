@@ -15,6 +15,7 @@ export declare class ChartLine {
     get timeDomain(): Date[];
     get verticalDomain(): number[];
     get timestamps(): Date[];
+    getValue(timestamp: Date): number;
     get dataEntries(): [string, number][];
     get color(): Color;
     set color(value: Color);

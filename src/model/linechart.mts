@@ -4,6 +4,7 @@ import { BaseChart } from "./basechart.js";
 import { ChartLine } from "./chart-line.mjs";
 import { HorizontalAxis, defaultHorizontalAxis } from "./horizontal-axis.js";
 import { VerticalAxis, defaultVerticalAxis } from "./vertical-axis.js";
+import { Tooltip } from "./tooltip.js";
 
 export class LineChart extends BaseChart{
 
@@ -16,14 +17,32 @@ export class LineChart extends BaseChart{
     private _timeScale: any;
     private _verticalScale: any;
 
+    private _timestamps: Date[] = [];
+
+    private _tooltip: Tooltip | undefined;
+
+
     constructor(id: string){
         super(id)
     }
 
     public addChartLine(chartLine: ChartLine){
         this.chartLines.push(chartLine)
+        this._timestamps = this._timestamps.concat(chartLine.timestamps)
         return this;
     }
+
+    public setTooltip(tooltip: Tooltip){
+        this._tooltip = tooltip;
+    }
+
+    public get tooltip(): Tooltip | undefined {
+        return this._tooltip;
+    }
+    public set tooltip(value: Tooltip | undefined) {
+        this._tooltip = value;
+    }
+
 
     public getChartlines(): ChartLine[]{
         return this.chartLines;
@@ -82,6 +101,10 @@ export class LineChart extends BaseChart{
 
     public set verticalScale(value: any) {
         this._verticalScale = value;
+    }
+
+    public get timestamps(): Date[]{
+        return this._timestamps;
     }
 
     public draw(){

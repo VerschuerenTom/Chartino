@@ -40,6 +40,9 @@ export class ChartLine{
         return this._timestamps
     }
 
+    public  getValue(timestamp: Date):number {
+        return this._data[timestamp.getTime()] //TODO: what if timestamp is not in array
+    }
     public get dataEntries(){
         return this._dataEntries;
     }

@@ -1,15 +1,15 @@
 import { clearSvg, initChartStructure } from "./svg-controller.js";
 import { drawAxes } from "./axis-controller.js";
 import { drawLines } from "./line-controller.js";
+import { drawTooltip } from "./tooltip-controller.js";
 export const drawLineChart = (lineChart) => {
     clearSvg(lineChart.getId());
     const chartStructure = initChartStructure(lineChart);
     const chartlines = lineChart.getChartlines();
     calculateDomains();
-    if (chartStructure.chartGroup !== undefined) {
-        drawAxes(chartStructure, lineChart);
-        drawLines(chartStructure, lineChart);
-    }
+    drawAxes(chartStructure, lineChart);
+    drawLines(chartStructure, lineChart);
+    drawTooltip(chartStructure, lineChart);
     function calculateDomains() {
         lineChart.timeDomain = chartlines.map(line => line.timeDomain).reduce((a, b) => {
             const minDate = a[0] < b[0] ? a[0] : b[0];

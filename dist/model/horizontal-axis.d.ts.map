@@ -1,1 +1,1 @@
-{"version":3,"file":"horizontal-axis.d.ts","sourceRoot":"","sources":["../../src/model/horizontal-axis.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,gBAAgB,CAAC;AAG1C,qBAAa,cAAe,SAAQ,QAAQ;CAE3C;AACD,eAAO,MAAM,qBAAqB,gBAAuB,CAAC"}
+{"version":3,"file":"horizontal-axis.d.ts","sourceRoot":"","sources":["../../src/model/horizontal-axis.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,gBAAgB,CAAC;AAE1C,qBAAa,cAAe,SAAQ,QAAQ;CAC3C;AACD,eAAO,MAAM,qBAAqB,gBAAuB,CAAC"}
