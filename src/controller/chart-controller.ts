@@ -12,13 +12,12 @@ export const drawLineChart = (lineChart: LineChart) => {
     const chartStructure: ChartStructure = initChartStructure(lineChart);
     
     const chartlines: ChartLine[] = lineChart.getChartlines()
-
-    
-    //TODO: fix for when we have multiple lines
     calculateDomains();
 
-    drawAxes(chartStructure, lineChart)
-    drawLines(chartStructure, lineChart)
+    if(chartStructure.chartGroup !== undefined){
+      drawAxes(chartStructure, lineChart)
+      drawLines(chartStructure, lineChart)
+    }
     
 
   function calculateDomains() {

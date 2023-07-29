@@ -1,5 +1,8 @@
 import * as d3 from "d3";
 export const drawLines = (chartStructure, chart) => {
+    if (chartStructure.chartGroup === undefined) {
+        return;
+    }
     if (chartStructure.linesGroup === undefined) {
         chartStructure.linesGroup = chartStructure.chartGroup.append("g");
     }
@@ -9,8 +12,8 @@ export const drawLines = (chartStructure, chart) => {
     const verticalScale = chart.verticalScale;
     lines.forEach(chartLine => {
         const line = d3.line()
-            //.defined((d) => !isNaN(d[1]))
-            .x((d, i) => {
+            .defined((d) => !isNaN(d[1]))
+            .x((d) => {
             return timeScale(d[0]);
         })
             .y(function (d) {
@@ -18,8 +21,7 @@ export const drawLines = (chartStructure, chart) => {
             return verticalScale(d[1]);
         })
             .curve(d3.curveLinear);
-        console.log(line);
-        const lineGroup = chartStructure.linesGroup
+        chartStructure.linesGroup
             .append("path")
             .attr("fill", "none")
             .datum(chartLine.dataEntries)

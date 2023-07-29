@@ -4,10 +4,8 @@ export class BaseAxis {
     }
     setOffset(offset) {
         this.offset = offset;
-        ;
     }
     getOffset() {
         return this.offset;
     }
 }
-;

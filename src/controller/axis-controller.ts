@@ -22,8 +22,8 @@ export const drawAxes = (chartStructure: ChartStructure, chart:LineChart) =>{
     chartStructure.verticalAxisGroup.selectAll("*").remove()
     chartStructure.horizontalAxisGroup.selectAll("*").remove()
 
-    let horizontalAxis = d3.axisBottom(chart.timeScale)
+    const horizontalAxis = d3.axisBottom(chart.timeScale)
     chartStructure.horizontalAxisGroup.call(horizontalAxis)
-    let verticalAxis = d3.axisLeft(chart.verticalScale)
+    const verticalAxis = d3.axisLeft(chart.verticalScale)
     chartStructure.verticalAxisGroup.call(verticalAxis)
 }

@@ -5,10 +5,11 @@ export const drawLineChart = (lineChart) => {
     clearSvg(lineChart.getId());
     const chartStructure = initChartStructure(lineChart);
     const chartlines = lineChart.getChartlines();
-    //TODO: fix for when we have multiple lines
     calculateDomains();
-    drawAxes(chartStructure, lineChart);
-    drawLines(chartStructure, lineChart);
+    if (chartStructure.chartGroup !== undefined) {
+        drawAxes(chartStructure, lineChart);
+        drawLines(chartStructure, lineChart);
+    }
     function calculateDomains() {
         lineChart.timeDomain = chartlines.map(line => line.timeDomain).reduce((a, b) => {
             const minDate = a[0] < b[0] ? a[0] : b[0];
