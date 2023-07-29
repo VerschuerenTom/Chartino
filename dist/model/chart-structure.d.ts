@@ -5,6 +5,8 @@ export declare class ChartStructure {
     private _horizontalAxisGroup;
     private _verticalAxisGroup;
     private _linesGroup;
+    private _brushGroup;
+    private _brush;
     private _chart;
     constructor(svg: any, baseChart: BaseChart);
     get chart(): BaseChart;
@@ -17,6 +19,10 @@ export declare class ChartStructure {
     set verticalAxisGroup(value: any);
     get linesGroup(): any;
     set linesGroup(value: any);
+    get brushGroup(): any;
+    set brushGroup(value: any);
+    get brush(): any;
+    set brush(value: any);
     getSvg(): any;
 }
 //# sourceMappingURL=chart-structure.d.ts.map

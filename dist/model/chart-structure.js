@@ -33,6 +33,18 @@ export class ChartStructure {
     set linesGroup(value) {
         this._linesGroup = value;
     }
+    get brushGroup() {
+        return this._brushGroup;
+    }
+    set brushGroup(value) {
+        this._brushGroup = value;
+    }
+    get brush() {
+        return this._brush;
+    }
+    set brush(value) {
+        this._brush = value;
+    }
     getSvg() {
         return this.svg;
     }

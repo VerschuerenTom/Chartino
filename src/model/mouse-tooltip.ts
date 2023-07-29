@@ -1,7 +1,7 @@
 export type TooltipData = {value: number, color: string}[]
 
 
-export class Tooltip{
+export class MouseTooltip{
 
     private _callback: (time:Date, pointData: TooltipData) => string
     private _positionCallback: (x: number, y: number) => {x:number, y:number} = (x,y) => ({x,y});

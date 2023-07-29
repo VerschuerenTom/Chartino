@@ -2,6 +2,7 @@ import { clearSvg, initChartStructure } from "./svg-controller.js";
 import { drawAxes } from "./axis-controller.js";
 import { drawLines } from "./line-controller.js";
 import { drawTooltip } from "./tooltip-controller.js";
+import { drawBrush } from "./brush-controller.mjs";
 export const drawLineChart = (lineChart) => {
     clearSvg(lineChart.getId());
     const chartStructure = initChartStructure(lineChart);
@@ -10,6 +11,7 @@ export const drawLineChart = (lineChart) => {
     drawAxes(chartStructure, lineChart);
     drawLines(chartStructure, lineChart);
     drawTooltip(chartStructure, lineChart);
+    drawBrush(chartStructure, lineChart);
     function calculateDomains() {
         lineChart.timeDomain = chartlines.map(line => line.timeDomain).reduce((a, b) => {
             const minDate = a[0] < b[0] ? a[0] : b[0];

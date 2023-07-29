@@ -1,0 +1,1 @@
+{"version":3,"file":"chart-brush.d.ts","sourceRoot":"","sources":["../../src/model/chart-brush.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,oBAAoB,CAAC;AAElD,qBAAa,UAAU;IAEnB,OAAO,CAAC,aAAa,CAAe;gBAExB,YAAY,EAAE,YAAY;CAGzC"}

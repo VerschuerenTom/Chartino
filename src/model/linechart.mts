@@ -4,7 +4,8 @@ import { BaseChart } from "./basechart.js";
 import { ChartLine } from "./chart-line.mjs";
 import { HorizontalAxis, defaultHorizontalAxis } from "./horizontal-axis.js";
 import { VerticalAxis, defaultVerticalAxis } from "./vertical-axis.js";
-import { Tooltip } from "./tooltip.js";
+import { MouseTooltip } from "./mouse-tooltip.js";
+import { ChartBrush } from "./chart-brush.js";
 
 export class LineChart extends BaseChart{
 
@@ -19,27 +20,34 @@ export class LineChart extends BaseChart{
 
     private _timestamps: Date[] = [];
 
-    private _tooltip: Tooltip | undefined;
+    private _tooltip: MouseTooltip | undefined;
+    private _brush: ChartBrush | undefined;
 
 
     constructor(id: string){
         super(id)
     }
 
-    public addChartLine(chartLine: ChartLine){
+    public addChartLine(chartLine: ChartLine): LineChart{
         this.chartLines.push(chartLine)
         this._timestamps = this._timestamps.concat(chartLine.timestamps)
         return this;
     }
 
-    public setTooltip(tooltip: Tooltip){
+    public setTooltip(tooltip: MouseTooltip): LineChart{
         this._tooltip = tooltip;
+        return this;
     }
 
-    public get tooltip(): Tooltip | undefined {
+    public setBrush(bursh: ChartBrush): LineChart{
+        this._brush = this.brush;
+        return this;
+    }
+
+    public get tooltip(): MouseTooltip | undefined {
         return this._tooltip;
     }
-    public set tooltip(value: Tooltip | undefined) {
+    public set tooltip(value: MouseTooltip | undefined) {
         this._tooltip = value;
     }
 
@@ -105,6 +113,13 @@ export class LineChart extends BaseChart{
 
     public get timestamps(): Date[]{
         return this._timestamps;
+    }
+
+    public get brush(): ChartBrush | undefined {
+        return this._brush;
+    }
+    public set brush(value: ChartBrush) {
+        this._brush = value;
     }
 
     public draw(){

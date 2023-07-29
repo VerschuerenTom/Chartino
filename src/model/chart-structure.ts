@@ -8,6 +8,8 @@ export class ChartStructure{
     private _horizontalAxisGroup: any;
     private _verticalAxisGroup: any;
     private _linesGroup: any;
+    private _brushGroup: any;
+    private _brush: any;
 
     private _chart: BaseChart;
 
@@ -54,6 +56,22 @@ export class ChartStructure{
 
     public set linesGroup(value: any) {
         this._linesGroup = value;
+    }
+
+    public get brushGroup(): any {
+        return this._brushGroup;
+    }
+
+    public set brushGroup(value: any) {
+        this._brushGroup = value;
+    }
+
+    public get brush(): any {
+        return this._brush;
+    }
+    
+    public set brush(value: any) {
+        this._brush = value;
     }
     
     public getSvg(){

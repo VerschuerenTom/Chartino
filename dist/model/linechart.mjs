@@ -19,6 +19,11 @@ export class LineChart extends BaseChart {
     }
     setTooltip(tooltip) {
         this._tooltip = tooltip;
+        return this;
+    }
+    setBrush(bursh) {
+        this._brush = this.brush;
+        return this;
     }
     get tooltip() {
         return this._tooltip;
@@ -75,6 +80,12 @@ export class LineChart extends BaseChart {
     }
     get timestamps() {
         return this._timestamps;
+    }
+    get brush() {
+        return this._brush;
+    }
+    set brush(value) {
+        this._brush = value;
     }
     draw() {
         drawLineChart(this);

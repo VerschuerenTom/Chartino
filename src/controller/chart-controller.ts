@@ -5,6 +5,8 @@ import { drawAxes } from "./axis-controller.js";
 import { ChartLine } from "../model/chart-line.mjs";
 import { drawLines } from "./line-controller.js";
 import { drawTooltip } from "./tooltip-controller.js";
+import { drawBrush } from "./brush-controller.mjs";
+import { line } from "d3";
 
 
 
@@ -18,6 +20,7 @@ export const drawLineChart = (lineChart: LineChart) => {
     drawAxes(chartStructure, lineChart)
     drawLines(chartStructure, lineChart)
     drawTooltip(chartStructure, lineChart)
+    drawBrush(chartStructure, lineChart);
     
 
   function calculateDomains() {
