@@ -25,6 +25,4 @@ export class BaseChart {
     public getId(): string{
         return this.id;
     }
-
-    
 }

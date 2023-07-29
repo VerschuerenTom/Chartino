@@ -14,10 +14,8 @@ export const drawLineChart = (lineChart: LineChart) => {
     const chartlines: ChartLine[] = lineChart.getChartlines()
     calculateDomains();
 
-    if(chartStructure.chartGroup !== undefined){
-      drawAxes(chartStructure, lineChart)
-      drawLines(chartStructure, lineChart)
-    }
+    drawAxes(chartStructure, lineChart)
+    drawLines(chartStructure, lineChart)
     
 
   function calculateDomains() {

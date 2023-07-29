@@ -32,6 +32,7 @@ export class LineChart extends BaseChart{
     public get horizontalAxis(): HorizontalAxis {
         return this._horizontalAxis;
     }
+
     public set horizontalAxis(value: HorizontalAxis) {
         this._horizontalAxis = value;
     }
@@ -39,6 +40,7 @@ export class LineChart extends BaseChart{
     public get verticalAxis(): VerticalAxis {
         return this._verticalAxis;
     }
+
     public set verticalAxis(value: VerticalAxis) {
         this._verticalAxis = value;
     }
@@ -46,6 +48,7 @@ export class LineChart extends BaseChart{
     public get timeDomain(): Date[] | undefined {
         return this._timeDomain;
     }
+
     public set timeDomain(value: Date[] | undefined) {
         if(value === undefined) return;
         this._timeDomain = value;
@@ -53,9 +56,11 @@ export class LineChart extends BaseChart{
             .domain(value)
             .range([this.horizontalAxis.offset.left, this.getClientWidth() - this.horizontalAxis.offset.right])
     }
+
     public get verticalDomain(): number[] {
         return this._verticalDomain;
     }
+
     public set verticalDomain(value: number[]) {
         this._verticalDomain = value;
         this.verticalScale = d3.scaleLinear()
@@ -66,6 +71,7 @@ export class LineChart extends BaseChart{
     public get timeScale(): any {
         return this._timeScale;
     }
+
     public set timeScale(value: any) {
         this._timeScale = value;
     }
@@ -73,14 +79,12 @@ export class LineChart extends BaseChart{
     public get verticalScale(): any {
         return this._verticalScale;
     }
+
     public set verticalScale(value: any) {
         this._verticalScale = value;
     }
 
-
-
     public draw(){
         drawLineChart(this)
     }
-
 }
