@@ -3,14 +3,15 @@ export const drawTooltip = (chartStructure, chart) => {
     if (chart.getChartlines().length === 0 || chart.tooltip === undefined) {
         return;
     }
+    const tooltipDiv = d3.select("#tooltip-div-" + chart.getId());
     chartStructure.chartGroup
         .append("g")
         .style("pointer-events", "none");
     chartStructure.getSvg()
-        .on("pointerenter pointermove", (event) => onTooltip(event, chart))
-        .on("pointerleave", (event) => onTooltipLeave(event, chart));
+        .on("pointerenter pointermove", (event) => onTooltip(event, chart, tooltipDiv))
+        .on("pointerleave", (event) => onTooltipLeave(event, chart, tooltipDiv));
 };
-const onTooltip = (event, chart) => {
+const onTooltip = (event, chart, tooltipDiv) => {
     if (chart.tooltip === undefined) {
         return;
     }
@@ -25,14 +26,14 @@ const onTooltip = (event, chart) => {
         };
     });
     const presentation = chart.tooltip.callback(currentTimestamp, tooltipData);
-    const tooltipDiv = d3.select("#tooltip-div-" + chart.getId());
     tooltipDiv.selectAll("*").remove();
+    const { x, y } = chart.tooltip.positionCallback(event.pageX, event.pageY);
     tooltipDiv
         .append("div")
         .style("position", "fixed")
         .html(presentation)
-        .style("top", (event.pageY) + "px").style("left", (event.pageX) + "px");
+        .style("top", (y) + "px").style("left", (x) + "px");
 };
-const onTooltipLeave = (event, chart) => {
-    d3.select("#tooltip-div-" + chart.getId()).selectAll("*").remove();
+const onTooltipLeave = (event, chart, tooltipDiv) => {
+    tooltipDiv.selectAll("*").remove();
 };

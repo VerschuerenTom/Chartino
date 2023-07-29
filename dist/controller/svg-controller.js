@@ -10,5 +10,6 @@ export const initChartStructure = (lineChart) => {
     return chartStructure;
 };
 export const clearSvg = (id) => {
+    console.log("clearing");
     d3.select("#" + id).selectAll("*").remove();
 };
