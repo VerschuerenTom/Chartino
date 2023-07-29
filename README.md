@@ -42,7 +42,7 @@ const chartLineTwo: ChartLine = new ChartLine(dataTwo);
 chartLineOne.color = "#FF0000"; //color red
 chartLineTwo.color = "#008000"; //color green
 
-lineChart.addChartLine(chartLine).addChartLine(chartLine).draw();
+lineChart.addChartLine(chartLineOne).addChartLine(chartLineTwo).draw();
 ```
 
 The corresponding html will be as follows:
