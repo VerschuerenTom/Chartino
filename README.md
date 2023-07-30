@@ -46,13 +46,14 @@ The corresponding html will be as follows:
 
 #### Chart with multiple lines
 
-Adding a more than one lines is possible. This can be done as follows:
+Adding lines is possible. This can be done as follows:
 ```typescript
 const chartLine = new ChartLine(data);
 const anotherChartLine = new ChartLine(data);
 
 lineChart
     .addChartLine(chartLine)
+    .addChartLine(anotherChartLine)
     .draw()
 ```
 
@@ -71,7 +72,7 @@ const getTooltipHtml = (time: Date, tooltipData: {value: number, color: string}[
 
 //new MouseTooltip
 const tooltip = new MouseTooltip(getTooltipHtml)
-//position the tooltip 10 pixel to the bottom and 10 pixels to the top of the mouse.
+//position the tooltip 10 pixels to the bottom and 10 pixels to the top of the mouse.
 tooltip.positionCallback = (x:number,y:number) => ({x: x +10, y: y +10})
 lineChart
     .setTooltip(tooltip)
