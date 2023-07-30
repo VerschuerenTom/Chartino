@@ -46,15 +46,14 @@ const onTooltipLeave = (event: any, chart: LineChart, tooltipDiv:any) => {
     tooltipDiv.selectAll("*").remove()
 }
 
-function getTooltipDiv(chart: LineChart) {
+const getTooltipDiv = (chart: LineChart) =>{
     const tooltipId = "tooltip-div-" + chart.getId();
     let tooltipDiv;
     if (document.getElementById(tooltipId) === null) {
-        const tooltipDiv = document.createElement("div")
+        tooltipDiv = document.createElement("div")
         tooltipDiv.setAttribute("id", tooltipId);
         document.body.appendChild(tooltipDiv);
-    }else{
-        tooltipDiv = d3.select("#" +tooltipId);
-    }
+    tooltipDiv = d3.select("#" +tooltipId);
     return tooltipDiv;
-}
+    }
+}   
