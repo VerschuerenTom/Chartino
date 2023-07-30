@@ -1,11 +1,12 @@
-export type Domain = [number, number]
+import { LineChart } from "./linechart.mjs"
+
+export type Domain = [number, number] | Date[]
 
 export class DomainLinker{
 
     private domainHistory: Domain[] = []
 
-    constructor(fullDomain: Domain){
-        this.pushDomain(fullDomain)
+    constructor(){
     }
 
     public pushDomain(domain: Domain){

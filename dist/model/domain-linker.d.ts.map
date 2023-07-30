@@ -1,1 +1,1 @@
-{"version":3,"file":"domain-linker.d.ts","sourceRoot":"","sources":["../../src/model/domain-linker.ts"],"names":[],"mappings":"AAAA,qBAAa,YAAY;;CAMxB"}
+{"version":3,"file":"domain-linker.d.ts","sourceRoot":"","sources":["../../src/model/domain-linker.ts"],"names":[],"mappings":"AAEA,MAAM,MAAM,MAAM,GAAG,CAAC,MAAM,EAAE,MAAM,CAAC,GAAG,IAAI,EAAE,CAAA;AAE9C,qBAAa,YAAY;IAErB,OAAO,CAAC,aAAa,CAAe;;IAK7B,UAAU,CAAC,MAAM,EAAE,MAAM;IAIzB,SAAS,CAAC,MAAM,EAAE,MAAM;IAIxB,YAAY;IAIZ,aAAa,IAAI,MAAM;CAIjC"}
