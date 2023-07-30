@@ -7,7 +7,7 @@ export const drawBrush = (chartStructure, chart) => {
     }
     if (chartStructure.brush === undefined) {
         chartStructure.brush = d3.brushX()
-            .extent([[chart.verticalAxis.offset.left, 0], [chart.getClientWidth() - chart.verticalAxis.offset.right, chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top]]);
+            .extent([[chart.verticalAxis.offset.left, -1], [chart.getClientWidth() - chart.verticalAxis.offset.right, chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top - 1]]);
         chart.brush.domainLinker.setFullDomain(chart.timeDomain);
         chartStructure.brush.on("end", (event) => onBrush(event, chart));
         chartStructure.brushGroup = chartStructure.chartGroup
@@ -20,8 +20,8 @@ export const drawBrush = (chartStructure, chart) => {
     }
 };
 const moveBrush = (chartStructure, chart, domain) => {
-    let x1 = chart.timeScale(domain[0]);
-    let x2 = chart.timeScale(domain[1]);
+    const x1 = chart.timeScale(domain[0]);
+    const x2 = chart.timeScale(domain[1]);
     chartStructure.brushGroup.call(chartStructure.brush.move, [x1, x2]);
 };
 const onBrush = (event, chart) => {

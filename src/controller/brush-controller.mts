@@ -12,7 +12,7 @@ export const drawBrush = (chartStructure: ChartStructure, chart: LineChart) =>{
     }
     if(chartStructure.brush === undefined){
         chartStructure.brush = d3.brushX()
-            .extent([[chart.verticalAxis.offset.left, 0], [chart.getClientWidth() - chart.verticalAxis.offset.right, chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top]])
+            .extent([[chart.verticalAxis.offset.left, -1], [chart.getClientWidth() - chart.verticalAxis.offset.right, chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top-1]])
         chart.brush.domainLinker.setFullDomain(chart.timeDomain as Domain)
         chartStructure.brush.on("end", (event:any) => onBrush(event, chart))
         chartStructure.brushGroup = chartStructure.chartGroup
