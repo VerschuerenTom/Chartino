@@ -39,7 +39,7 @@ export declare class LineChart extends BaseChart {
     set verticalScale(value: any);
     get timestamps(): Date[];
     get brush(): ChartBrush | undefined;
-    set brush(value: ChartBrush);
+    set brush(value: ChartBrush | undefined);
     get zoomBrush(): ChartZoomBrush | undefined;
     set zoomBrush(value: ChartZoomBrush | undefined);
     draw(): void;

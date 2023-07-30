@@ -6,8 +6,8 @@ import { ChartLine } from "../model/chart-line.mjs";
 import { drawLines } from "./line-controller.js";
 import { drawTooltip } from "./tooltip-controller.js";
 import { drawBrush } from "./brush-controller.mjs";
-import { line } from "d3";
 import { drawZoomBrush } from "./zoom-brush-controller.mjs";
+import { drawClip } from "./clip-controller.js";
 
 
 const chartStructures: ChartStructure[] = []
@@ -27,6 +27,7 @@ export const drawLineChart = (lineChart: LineChart) => {
     drawTooltip(chartStructure, lineChart)
     drawBrush(chartStructure, lineChart);
     drawZoomBrush(chartStructure, lineChart)
+    drawClip(chartStructure, lineChart)
     
 
   function calculateDomains() {

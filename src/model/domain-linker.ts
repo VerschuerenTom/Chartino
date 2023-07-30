@@ -1,5 +1,3 @@
-import { LineChart } from "./linechart.mjs"
-
 export type Domain = [number, number] | Date[]
 export type DomainSubscriber = (domain: Domain) => void
 

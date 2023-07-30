@@ -124,7 +124,7 @@ export class LineChart extends BaseChart{
     public get brush(): ChartBrush | undefined {
         return this._brush;
     }
-    public set brush(value: ChartBrush) {
+    public set brush(value: ChartBrush | undefined) {
         this._brush = value;
     }
 
