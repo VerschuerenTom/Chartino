@@ -3,7 +3,7 @@ export const drawTooltip = (chartStructure, chart) => {
     if (chart.getChartlines().length === 0 || chart.tooltip === undefined) {
         return;
     }
-    const tooltipDiv = d3.select("#tooltip-div-" + chart.getId());
+    const tooltipDiv = getTooltipDiv(chart);
     chartStructure.chartGroup
         .append("g")
         .style("pointer-events", "none");
@@ -37,3 +37,16 @@ const onTooltip = (event, chart, tooltipDiv) => {
 const onTooltipLeave = (event, chart, tooltipDiv) => {
     tooltipDiv.selectAll("*").remove();
 };
+function getTooltipDiv(chart) {
+    const tooltipId = "tooltip-div-" + chart.getId();
+    let tooltipDiv;
+    if (document.getElementById(tooltipId) === null) {
+        const tooltipDiv = document.createElement("div");
+        tooltipDiv.setAttribute("id", tooltipId);
+        document.body.appendChild(tooltipDiv);
+    }
+    else {
+        tooltipDiv = d3.select("#" + tooltipId);
+    }
+    return tooltipDiv;
+}

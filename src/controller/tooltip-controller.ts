@@ -6,8 +6,7 @@ export const drawTooltip = (chartStructure: ChartStructure, chart: LineChart) =>
     if(chart.getChartlines().length === 0 || chart.tooltip === undefined){
         return;
     }
-    const tooltipDiv = d3.select("#tooltip-div-" + chart.getId())
-
+    const tooltipDiv = getTooltipDiv(chart);
     chartStructure.chartGroup
         .append("g")
         .style("pointer-events", "none")
@@ -45,4 +44,17 @@ const onTooltip = (event: any,chart: LineChart,tooltipDiv:any) => {
 
 const onTooltipLeave = (event: any, chart: LineChart, tooltipDiv:any) => {
     tooltipDiv.selectAll("*").remove()
+}
+
+function getTooltipDiv(chart: LineChart) {
+    const tooltipId = "tooltip-div-" + chart.getId();
+    let tooltipDiv;
+    if (document.getElementById(tooltipId) === null) {
+        const tooltipDiv = document.createElement("div")
+        tooltipDiv.setAttribute("id", tooltipId);
+        document.body.appendChild(tooltipDiv);
+    }else{
+        tooltipDiv = d3.select("#" +tooltipId);
+    }
+    return tooltipDiv;
 }
