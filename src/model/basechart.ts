@@ -17,7 +17,7 @@ export class BaseChart {
     private getElement() {
         const el = document.getElementById(this.id);
         if (el == undefined) {
-            throw new Error("Element with id " + this.id + "not found");
+            throw new Error("Element with id " + this.id + " not found");
         }
         return el;
     }

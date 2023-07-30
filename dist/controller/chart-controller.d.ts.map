@@ -1,1 +1,1 @@
-{"version":3,"file":"chart-controller.d.ts","sourceRoot":"","sources":["../../src/controller/chart-controller.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,wBAAwB,CAAA;AAYlD,eAAO,MAAM,aAAa,cAAe,SAAS,SAuBjD,CAAA"}
+{"version":3,"file":"chart-controller.d.ts","sourceRoot":"","sources":["../../src/controller/chart-controller.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,wBAAwB,CAAA;AAclD,eAAO,MAAM,aAAa,cAAe,SAAS,SA2BjD,CAAA"}

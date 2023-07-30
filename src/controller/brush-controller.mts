@@ -3,10 +3,17 @@ import { ChartStructure } from "../model/chart-structure.js";
 import * as d3 from "d3";
 import { Domain } from "../model/domain-linker.js";
 
+
+//TODO: Add events for when another charts zooms,brushes to update this one
+
 export const drawBrush = (chartStructure: ChartStructure, chart: LineChart) =>{
+    if(chart.brush === undefined){
+        return
+    }
     if(chartStructure.brush === undefined){
         chartStructure.brush = d3.brushX()
             .extent([[0, 0], [chart.getClientWidth(), chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top]])
+        chart.brush.domainLinker.setFullDomain(chart.timeDomain as Domain)
         chartStructure.brush.on("end", (event:any) => onBrush(event, chart))
         chartStructure.brushGroup = chartStructure.chartGroup
             .append('g')
@@ -14,6 +21,7 @@ export const drawBrush = (chartStructure: ChartStructure, chart: LineChart) =>{
             .attr("class", "brush")
             .call(chartStructure.brush);
             moveBrush(chartStructure, chart, chart.timeDomain as Date[])
+            chart.brush?.domainLinker.subscribe((domain) => moveBrush(chartStructure, chart, domain))
     }
 
 }
@@ -29,5 +37,4 @@ const onBrush = (event: any, chart: LineChart) => {
     if (event.sourceEvent === undefined) return  // ignore brush-by-zoom
     const newDomain = event.selection.map(chart.timeScale.invert, chart.timeScale)
     chart.brush.domainLinker.pushDomain(newDomain)
-    //TODO: Zoom other chart when brushing
 }

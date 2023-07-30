@@ -7,13 +7,18 @@ import { drawLines } from "./line-controller.js";
 import { drawTooltip } from "./tooltip-controller.js";
 import { drawBrush } from "./brush-controller.mjs";
 import { line } from "d3";
+import { drawZoomBrush } from "./zoom-brush-controller.mjs";
 
 
+const chartStructures: ChartStructure[] = []
 
 export const drawLineChart = (lineChart: LineChart) => {
+  if(isAlreadyInitialized(lineChart.getId())){
+    return;
+  }
     clearSvg(lineChart.getId());
     const chartStructure: ChartStructure = initChartStructure(lineChart);
-    
+    chartStructures.push(chartStructure)
     const chartlines: ChartLine[] = lineChart.getChartlines()
     calculateDomains();
 
@@ -21,6 +26,7 @@ export const drawLineChart = (lineChart: LineChart) => {
     drawLines(chartStructure, lineChart)
     drawTooltip(chartStructure, lineChart)
     drawBrush(chartStructure, lineChart);
+    drawZoomBrush(chartStructure, lineChart)
     
 
   function calculateDomains() {
@@ -33,6 +39,10 @@ export const drawLineChart = (lineChart: LineChart) => {
       return [Math.min(a[0], b[0]), Math.max(a[1], b[1])];
     });
   }
+}
+
+const isAlreadyInitialized = (id:string): boolean => {
+  return chartStructures.map(structure => structure.chart.getId()).includes(id)
 }
 
 

@@ -45,6 +45,18 @@ export class ChartStructure {
     set brush(value) {
         this._brush = value;
     }
+    set zoomBrush(value) {
+        this._zoomBrush = value;
+    }
+    get zoomBrush() {
+        return this._zoomBrush;
+    }
+    get zoomBrushGroup() {
+        return this._zoomBrushGroup;
+    }
+    set zoomBrushGroup(value) {
+        this._zoomBrushGroup = value;
+    }
     getSvg() {
         return this.svg;
     }

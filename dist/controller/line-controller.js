@@ -20,7 +20,6 @@ function drawLine(timeScale, verticalScale, chartStructure, chartLine) {
         return timeScale(d[0]);
     })
         .y(function (d) {
-        console.log(verticalScale(d[1]));
         return verticalScale(d[1]);
     })
         .curve(d3.curveLinear);

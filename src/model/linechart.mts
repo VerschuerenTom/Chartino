@@ -6,6 +6,7 @@ import { HorizontalAxis, defaultHorizontalAxis } from "./horizontal-axis.js";
 import { VerticalAxis, defaultVerticalAxis } from "./vertical-axis.js";
 import { MouseTooltip } from "./mouse-tooltip.js";
 import { ChartBrush } from "./chart-brush.js";
+import { ChartZoomBrush } from "./chart-zoom-brush.js";
 
 export class LineChart extends BaseChart{
 
@@ -22,7 +23,7 @@ export class LineChart extends BaseChart{
 
     private _tooltip: MouseTooltip | undefined;
     private _brush: ChartBrush | undefined;
-
+    private _zoomBrush: ChartZoomBrush | undefined;
 
     constructor(id: string){
         super(id)
@@ -39,8 +40,13 @@ export class LineChart extends BaseChart{
         return this;
     }
 
-    public setBrush(bursh: ChartBrush): LineChart{
-        this._brush = this.brush;
+    public setBrush(brush: ChartBrush): LineChart{
+        this._brush = brush;
+        return this;
+    }
+
+    public setZoom(zoomBrush: ChartZoomBrush): LineChart{
+        this._zoomBrush = zoomBrush;
         return this;
     }
 
@@ -120,6 +126,13 @@ export class LineChart extends BaseChart{
     }
     public set brush(value: ChartBrush) {
         this._brush = value;
+    }
+
+    public get zoomBrush(): ChartZoomBrush | undefined {
+        return this._zoomBrush;
+    }
+    public set zoomBrush(value: ChartZoomBrush | undefined) {
+        this._zoomBrush = value;
     }
 
     public draw(){

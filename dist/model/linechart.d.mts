@@ -4,6 +4,7 @@ import { HorizontalAxis } from "./horizontal-axis.js";
 import { VerticalAxis } from "./vertical-axis.js";
 import { MouseTooltip } from "./mouse-tooltip.js";
 import { ChartBrush } from "./chart-brush.js";
+import { ChartZoomBrush } from "./chart-zoom-brush.js";
 export declare class LineChart extends BaseChart {
     private chartLines;
     private _horizontalAxis;
@@ -15,10 +16,12 @@ export declare class LineChart extends BaseChart {
     private _timestamps;
     private _tooltip;
     private _brush;
+    private _zoomBrush;
     constructor(id: string);
     addChartLine(chartLine: ChartLine): LineChart;
     setTooltip(tooltip: MouseTooltip): LineChart;
-    setBrush(bursh: ChartBrush): LineChart;
+    setBrush(brush: ChartBrush): LineChart;
+    setZoom(zoomBrush: ChartZoomBrush): LineChart;
     get tooltip(): MouseTooltip | undefined;
     set tooltip(value: MouseTooltip | undefined);
     getChartlines(): ChartLine[];
@@ -37,6 +40,8 @@ export declare class LineChart extends BaseChart {
     get timestamps(): Date[];
     get brush(): ChartBrush | undefined;
     set brush(value: ChartBrush);
+    get zoomBrush(): ChartZoomBrush | undefined;
+    set zoomBrush(value: ChartZoomBrush | undefined);
     draw(): void;
 }
 //# sourceMappingURL=linechart.d.mts.map

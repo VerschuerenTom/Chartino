@@ -10,6 +10,8 @@ export class ChartStructure{
     private _linesGroup: any;
     private _brushGroup: any;
     private _brush: any;
+    private _zoomBrushGroup: any;
+    private _zoomBrush: any;
 
     private _chart: BaseChart;
 
@@ -72,6 +74,22 @@ export class ChartStructure{
     
     public set brush(value: any) {
         this._brush = value;
+    }
+
+    public set zoomBrush(value: any) {
+        this._zoomBrush = value;
+    }
+    
+    public get zoomBrush(): any {
+        return this._zoomBrush;
+    }
+
+    public get zoomBrushGroup(): any {
+        return this._zoomBrushGroup;
+    }
+
+    public set zoomBrushGroup(value: any) {
+        this._zoomBrushGroup = value;
     }
     
     public getSvg(){

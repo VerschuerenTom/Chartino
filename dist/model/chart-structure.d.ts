@@ -7,6 +7,8 @@ export declare class ChartStructure {
     private _linesGroup;
     private _brushGroup;
     private _brush;
+    private _zoomBrushGroup;
+    private _zoomBrush;
     private _chart;
     constructor(svg: any, baseChart: BaseChart);
     get chart(): BaseChart;
@@ -23,6 +25,10 @@ export declare class ChartStructure {
     set brushGroup(value: any);
     get brush(): any;
     set brush(value: any);
+    set zoomBrush(value: any);
+    get zoomBrush(): any;
+    get zoomBrushGroup(): any;
+    set zoomBrushGroup(value: any);
     getSvg(): any;
 }
 //# sourceMappingURL=chart-structure.d.ts.map

@@ -3,15 +3,22 @@ import { drawAxes } from "./axis-controller.js";
 import { drawLines } from "./line-controller.js";
 import { drawTooltip } from "./tooltip-controller.js";
 import { drawBrush } from "./brush-controller.mjs";
+import { drawZoomBrush } from "./zoom-brush-controller.mjs";
+const chartStructures = [];
 export const drawLineChart = (lineChart) => {
+    if (isAlreadyInitialized(lineChart.getId())) {
+        return;
+    }
     clearSvg(lineChart.getId());
     const chartStructure = initChartStructure(lineChart);
+    chartStructures.push(chartStructure);
     const chartlines = lineChart.getChartlines();
     calculateDomains();
     drawAxes(chartStructure, lineChart);
     drawLines(chartStructure, lineChart);
     drawTooltip(chartStructure, lineChart);
     drawBrush(chartStructure, lineChart);
+    drawZoomBrush(chartStructure, lineChart);
     function calculateDomains() {
         lineChart.timeDomain = chartlines.map(line => line.timeDomain).reduce((a, b) => {
             const minDate = a[0] < b[0] ? a[0] : b[0];
@@ -22,4 +29,7 @@ export const drawLineChart = (lineChart) => {
             return [Math.min(a[0], b[0]), Math.max(a[1], b[1])];
         });
     }
+};
+const isAlreadyInitialized = (id) => {
+    return chartStructures.map(structure => structure.chart.getId()).includes(id);
 };
