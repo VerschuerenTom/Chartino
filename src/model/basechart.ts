@@ -1,17 +1,16 @@
 export class BaseChart {
-
     private id;
 
-    constructor(id: string){
+    constructor(id: string) {
         this.id = id;
     }
 
-    public getClientHeight(): number{
+    public getClientHeight(): number {
         return this.getElement().clientHeight;
     }
 
-    public getClientWidth(): number{
-        return this.getElement().clientWidth
+    public getClientWidth(): number {
+        return this.getElement().clientWidth;
     }
 
     private getElement() {
@@ -22,7 +21,7 @@ export class BaseChart {
         return el;
     }
 
-    public getId(): string{
+    public getId(): string {
         return this.id;
     }
 }

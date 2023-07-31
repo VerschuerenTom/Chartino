@@ -8,14 +8,13 @@ import { MouseTooltip } from "./mouse-tooltip.js";
 import { ChartBrush } from "./chart-brush.js";
 import { ChartZoomBrush } from "./chart-zoom-brush.js";
 
-export class LineChart extends BaseChart{
-
-    private chartLines: ChartLine[] = []
+export class LineChart extends BaseChart {
+    private chartLines: ChartLine[] = [];
     private _horizontalAxis: HorizontalAxis = defaultHorizontalAxis;
     private _verticalAxis: VerticalAxis = defaultVerticalAxis;
 
     private _timeDomain: Date[] | undefined;
-    private _verticalDomain: number[] = [0,0];
+    private _verticalDomain: number[] = [0, 0];
     private _timeScale: any;
     private _verticalScale: any;
 
@@ -25,27 +24,27 @@ export class LineChart extends BaseChart{
     private _brush: ChartBrush | undefined;
     private _zoomBrush: ChartZoomBrush | undefined;
 
-    constructor(id: string){
-        super(id)
+    constructor(id: string) {
+        super(id);
     }
 
-    public addChartLine(chartLine: ChartLine): LineChart{
-        this.chartLines.push(chartLine)
-        this._timestamps = this._timestamps.concat(chartLine.timestamps)
+    public addChartLine(chartLine: ChartLine): LineChart {
+        this.chartLines.push(chartLine);
+        this._timestamps = this._timestamps.concat(chartLine.timestamps);
         return this;
     }
 
-    public setTooltip(tooltip: MouseTooltip): LineChart{
+    public setTooltip(tooltip: MouseTooltip): LineChart {
         this._tooltip = tooltip;
         return this;
     }
 
-    public setBrush(brush: ChartBrush): LineChart{
+    public setBrush(brush: ChartBrush): LineChart {
         this._brush = brush;
         return this;
     }
 
-    public setZoom(zoomBrush: ChartZoomBrush): LineChart{
+    public setZoom(zoomBrush: ChartZoomBrush): LineChart {
         this._zoomBrush = zoomBrush;
         return this;
     }
@@ -57,8 +56,7 @@ export class LineChart extends BaseChart{
         this._tooltip = value;
     }
 
-
-    public getChartlines(): ChartLine[]{
+    public getChartlines(): ChartLine[] {
         return this.chartLines;
     }
 
@@ -69,7 +67,7 @@ export class LineChart extends BaseChart{
     public set horizontalAxis(value: HorizontalAxis) {
         this._horizontalAxis = value;
     }
-    
+
     public get verticalAxis(): VerticalAxis {
         return this._verticalAxis;
     }
@@ -83,11 +81,15 @@ export class LineChart extends BaseChart{
     }
 
     public set timeDomain(value: Date[] | undefined) {
-        if(value === undefined) return;
+        if (value === undefined) return;
         this._timeDomain = value;
-        this.timeScale = d3.scaleTime()
+        this.timeScale = d3
+            .scaleTime()
             .domain(value)
-            .range([this.horizontalAxis.offset.left, this.getClientWidth() - this.horizontalAxis.offset.right])
+            .range([
+                this.horizontalAxis.offset.left,
+                this.getClientWidth() - this.horizontalAxis.offset.right,
+            ]);
     }
 
     public get verticalDomain(): number[] {
@@ -96,9 +98,13 @@ export class LineChart extends BaseChart{
 
     public set verticalDomain(value: number[]) {
         this._verticalDomain = value;
-        this.verticalScale = d3.scaleLinear()
+        this.verticalScale = d3
+            .scaleLinear()
             .domain(this._verticalDomain)
-            .range([this.horizontalAxis.offset.top,this.getClientHeight() - this.horizontalAxis.offset.bottom])
+            .range([
+                this.horizontalAxis.offset.top,
+                this.getClientHeight() - this.horizontalAxis.offset.bottom,
+            ]);
     }
 
     public get timeScale(): any {
@@ -117,7 +123,7 @@ export class LineChart extends BaseChart{
         this._verticalScale = value;
     }
 
-    public get timestamps(): Date[]{
+    public get timestamps(): Date[] {
         return this._timestamps;
     }
 
@@ -135,7 +141,7 @@ export class LineChart extends BaseChart{
         this._zoomBrush = value;
     }
 
-    public draw(){
-        drawLineChart(this)
+    public draw() {
+        drawLineChart(this);
     }
 }

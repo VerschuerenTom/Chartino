@@ -1,7 +1,6 @@
 import { LineChart } from "./linechart.mjs";
 
-export class ChartStructure{
-
+export class ChartStructure {
     private svg: any;
 
     private _chartGroup: any;
@@ -15,7 +14,7 @@ export class ChartStructure{
 
     private _chart: LineChart;
 
-    constructor(svg: any, baseChart: LineChart){
+    constructor(svg: any, baseChart: LineChart) {
         this.svg = svg;
         this._chart = baseChart;
     }
@@ -23,7 +22,7 @@ export class ChartStructure{
     public get chart(): LineChart {
         return this._chart;
     }
-    
+
     public set chart(value: LineChart) {
         this._chart = value;
     }
@@ -71,7 +70,7 @@ export class ChartStructure{
     public get brush(): any {
         return this._brush;
     }
-    
+
     public set brush(value: any) {
         this._brush = value;
     }
@@ -79,7 +78,7 @@ export class ChartStructure{
     public set zoomBrush(value: any) {
         this._zoomBrush = value;
     }
-    
+
     public get zoomBrush(): any {
         return this._zoomBrush;
     }
@@ -91,8 +90,8 @@ export class ChartStructure{
     public set zoomBrushGroup(value: any) {
         this._zoomBrushGroup = value;
     }
-    
-    public getSvg(){
+
+    public getSvg() {
         return this.svg;
     }
 }
