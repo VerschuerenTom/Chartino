@@ -10,6 +10,7 @@ export class ChartLine{
     private _dataEntries;
     private _color: Color = "#000000";
     private _timeDomain: Date[];
+    private _isAutoScale: boolean = false;
 
     private _verticalDomain: number[] = [0, 0];
 
@@ -19,6 +20,14 @@ export class ChartLine{
             this._timeDomain  = d3.extent(this.timestamps) as Date[]
             this._dataEntries = Object.entries(this._data)
             this._verticalDomain = d3.extent(Object.values(this._data)).map(number => number) as number[]
+    }
+
+    public setAutoScale(isAutoScale: boolean){
+        this.isAutoScale = isAutoScale;
+    }
+
+    public setColor(color:Color){
+        this.color = color;
     }
 
     public get data(): LineData {
@@ -43,6 +52,8 @@ export class ChartLine{
     public  getValue(timestamp: Date):number {
         return this._data[timestamp.getTime()] //TODO: what if timestamp is not in array
     }
+
+    
     public get dataEntries(){
         return this._dataEntries;
     }
@@ -52,6 +63,13 @@ export class ChartLine{
     }
     public set color(value: Color) {
         this._color = value;
+    }
+
+    public get isAutoScale(): boolean {
+        return this._isAutoScale;
+    }
+    public set isAutoScale(value: boolean) {
+        this._isAutoScale = value;
     }
 
 }

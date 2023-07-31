@@ -1,4 +1,4 @@
-import { BaseChart } from "./basechart.js";
+import { LineChart } from "./linechart.mjs";
 
 export class ChartStructure{
 
@@ -13,18 +13,18 @@ export class ChartStructure{
     private _zoomBrushGroup: any;
     private _zoomBrush: any;
 
-    private _chart: BaseChart;
+    private _chart: LineChart;
 
-    constructor(svg: any, baseChart: BaseChart){
+    constructor(svg: any, baseChart: LineChart){
         this.svg = svg;
         this._chart = baseChart;
     }
 
-    public get chart(): BaseChart {
+    public get chart(): LineChart {
         return this._chart;
     }
     
-    public set chart(value: BaseChart) {
+    public set chart(value: LineChart) {
         this._chart = value;
     }
 

@@ -8,8 +8,11 @@ export declare class ChartLine {
     private _dataEntries;
     private _color;
     private _timeDomain;
+    private _isAutoScale;
     private _verticalDomain;
     constructor(data: LineData);
+    setAutoScale(isAutoScale: boolean): void;
+    setColor(color: Color): void;
     get data(): LineData;
     set data(value: LineData);
     get timeDomain(): Date[];
@@ -19,6 +22,8 @@ export declare class ChartLine {
     get dataEntries(): [string, number][];
     get color(): Color;
     set color(value: Color);
+    get isAutoScale(): boolean;
+    set isAutoScale(value: boolean);
 }
 export {};
 //# sourceMappingURL=chart-line.d.mts.map

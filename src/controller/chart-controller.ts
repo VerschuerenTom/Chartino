@@ -37,7 +37,7 @@ export const drawLineChart = (lineChart: LineChart) => {
       return [minDate, maxDate];
     });
     lineChart.verticalDomain = chartlines.map(line => line.verticalDomain).reduce((a, b) => {
-      return [Math.min(a[0], b[0]), Math.max(a[1], b[1])];
+      return [Math.max(a[1], b[1]),Math.min(a[0], b[0])];
     });
   }
 }

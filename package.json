@@ -1,6 +1,6 @@
 {
   "name": "chartino",
-  "version": "0.3.1",
+  "version": "0.3.0",
   "description": "Coming soon! Simple timeseries library",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
