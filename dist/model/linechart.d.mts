@@ -29,15 +29,15 @@ export declare class LineChart extends BaseChart {
     set horizontalAxis(value: HorizontalAxis);
     get verticalAxis(): VerticalAxis;
     set verticalAxis(value: VerticalAxis);
-    get timeDomain(): Date[] | undefined;
-    set timeDomain(value: Date[] | undefined);
+    get timeDomain(): number[] | undefined;
+    set timeDomain(value: number[] | undefined);
     get verticalDomain(): number[];
     set verticalDomain(value: number[]);
     get timeScale(): any;
     set timeScale(value: any);
     get verticalScale(): any;
     set verticalScale(value: any);
-    get timestamps(): Date[];
+    get timestamps(): number[];
     get brush(): ChartBrush | undefined;
     set brush(value: ChartBrush | undefined);
     get zoomBrush(): ChartZoomBrush | undefined;

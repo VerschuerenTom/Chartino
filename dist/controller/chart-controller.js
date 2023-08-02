@@ -22,16 +22,22 @@ export const drawLineChart = (lineChart) => {
     drawZoomBrush(chartStructure, lineChart);
     drawClip(chartStructure, lineChart);
     function calculateDomains() {
-        lineChart.timeDomain = chartlines.map(line => line.timeDomain).reduce((a, b) => {
+        lineChart.timeDomain = chartlines
+            .map((line) => line.timeDomain)
+            .reduce((a, b) => {
             const minDate = a[0] < b[0] ? a[0] : b[0];
             const maxDate = a[1] > b[1] ? a[1] : b[1];
             return [minDate, maxDate];
         });
-        lineChart.verticalDomain = chartlines.map(line => line.verticalDomain).reduce((a, b) => {
+        lineChart.verticalDomain = chartlines
+            .map((line) => line.verticalDomain)
+            .reduce((a, b) => {
             return [Math.max(a[1], b[1]), Math.min(a[0], b[0])];
         });
     }
 };
 const isAlreadyInitialized = (id) => {
-    return chartStructures.map(structure => structure.chart.getId()).includes(id);
+    return chartStructures
+        .map((structure) => structure.chart.getId())
+        .includes(id);
 };

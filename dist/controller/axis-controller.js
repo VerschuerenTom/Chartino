@@ -11,7 +11,7 @@ function drawHorizontalAxis(chartStructure, vAxis, chart) {
     }
     if (chartStructure.verticalAxisGroup === undefined) {
         chartStructure.verticalAxisGroup = chartStructure.chartGroup
-            .append('g')
+            .append("g")
             .attr("transform", "translate(" + vAxis.offset.left + ", 0)");
     }
     chartStructure.verticalAxisGroup.selectAll("*").remove();
@@ -24,7 +24,7 @@ function drawVerticalAxis(chartStructure, height, chart) {
     }
     if (chartStructure.horizontalAxisGroup === undefined) {
         chartStructure.horizontalAxisGroup = chartStructure.chartGroup
-            .append('g')
+            .append("g")
             .attr("transform", "translate(0," + height + ")");
     }
     chartStructure.horizontalAxisGroup.selectAll("*").remove();

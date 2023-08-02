@@ -4,10 +4,9 @@ export const drawTooltip = (chartStructure, chart) => {
         return;
     }
     const tooltipDiv = getTooltipDiv(chart);
-    chartStructure.chartGroup
-        .append("g")
-        .style("pointer-events", "none");
-    chartStructure.getSvg()
+    chartStructure.chartGroup.append("g").style("pointer-events", "none");
+    chartStructure
+        .getSvg()
         .on("pointerenter pointermove", (event) => onTooltip(event, chart, tooltipDiv))
         .on("pointerleave", (event) => onTooltipLeave(event, chart, tooltipDiv));
 };
@@ -19,10 +18,10 @@ const onTooltip = (event, chart, tooltipDiv) => {
     const verticalPointer = d3.pointer(event)[0];
     const intersectionPoint = d3.bisectCenter(timestamps, chart.timeScale.invert(verticalPointer));
     const currentTimestamp = timestamps[intersectionPoint];
-    const tooltipData = chart.getChartlines().map(line => {
+    const tooltipData = chart.getChartlines().map((line) => {
         return {
             value: line.getValue(currentTimestamp),
-            color: line.color
+            color: line.color,
         };
     });
     const presentation = chart.tooltip.callback(currentTimestamp, tooltipData);
@@ -32,7 +31,8 @@ const onTooltip = (event, chart, tooltipDiv) => {
         .append("div")
         .style("position", "fixed")
         .html(presentation)
-        .style("top", (y) + "px").style("left", (x) + "px");
+        .style("top", y + "px")
+        .style("left", x + "px");
 };
 const onTooltipLeave = (event, chart, tooltipDiv) => {
     tooltipDiv.selectAll("*").remove();

@@ -57,18 +57,26 @@ export class LineChart extends BaseChart {
         if (value === undefined)
             return;
         this._timeDomain = value;
-        this.timeScale = d3.scaleTime()
+        this.timeScale = d3
+            .scaleTime()
             .domain(value)
-            .range([this.horizontalAxis.offset.left, this.getClientWidth() - this.horizontalAxis.offset.right]);
+            .range([
+            this.horizontalAxis.offset.left,
+            this.getClientWidth() - this.horizontalAxis.offset.right,
+        ]);
     }
     get verticalDomain() {
         return this._verticalDomain;
     }
     set verticalDomain(value) {
         this._verticalDomain = value;
-        this.verticalScale = d3.scaleLinear()
+        this.verticalScale = d3
+            .scaleLinear()
             .domain(this._verticalDomain)
-            .range([this.horizontalAxis.offset.top, this.getClientHeight() - this.horizontalAxis.offset.bottom]);
+            .range([
+            this.horizontalAxis.offset.top,
+            this.getClientHeight() - this.horizontalAxis.offset.bottom,
+        ]);
     }
     get timeScale() {
         return this._timeScale;

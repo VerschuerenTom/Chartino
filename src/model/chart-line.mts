@@ -1,28 +1,27 @@
 import * as d3 from "d3";
 import { Color } from "./color.js";
 
-type LineData = { [key: number]: number }; //allow any for invalid data...then filter it out
-
 export class ChartLine {
-    private _data: LineData;
-    private _timestamps: Date[];
-    private _dataEntries;
+    private _data: number[];
+    private _timestamps: number[];
     private _color: Color = "#000000";
-    private _timeDomain: Date[];
+    private _timeDomain: number[];
     private _isAutoScale: boolean = false;
+    private _lineData: [Date, number][] = [];
 
     private _verticalDomain: number[] = [0, 0];
 
-    constructor(data: LineData) {
+    constructor(timestamps: number[], data: number[]) {
+        if (timestamps.length !== data.length) {
+            throw Error("Timestamp array and data array should be of the same length!");
+        }
         this._data = data;
-        this._timestamps = Object.keys(this._data).map(
-            (number) => new Date(parseInt(number))
-        );
-        this._timeDomain = d3.extent(this.timestamps) as Date[];
-        this._dataEntries = Object.entries(this._data);
-        this._verticalDomain = d3
-            .extent(Object.values(this._data))
-            .map((number) => number) as number[];
+        this._timestamps = timestamps;
+        this._timeDomain = d3.extent(timestamps) as number[];
+        this._verticalDomain = d3.extent(data).map((number) => number) as number[];
+        this._lineData = timestamps.map((timestamp, index) => {
+            return [new Date(timestamp), data[index]];
+        });
     }
 
     public setAutoScale(isAutoScale: boolean) {
@@ -33,14 +32,14 @@ export class ChartLine {
         this.color = color;
     }
 
-    public get data(): LineData {
+    public get data(): number[] {
         return this._data;
     }
-    public set data(value: LineData) {
+    public set data(value: number[]) {
         this._data = value;
     }
 
-    public get timeDomain(): Date[] {
+    public get timeDomain(): number[] {
         return this._timeDomain;
     }
 
@@ -48,16 +47,13 @@ export class ChartLine {
         return this._verticalDomain;
     }
 
-    public get timestamps(): Date[] {
+    public get timestamps(): number[] {
         return this._timestamps;
     }
 
-    public getValue(timestamp: Date): number {
-        return this._data[timestamp.getTime()]; //TODO: what if timestamp is not in array
-    }
-
-    public get dataEntries() {
-        return this._dataEntries;
+    public getValue(timestamp: number): number {
+        const index = this._timestamps.findIndex((element) => element == timestamp);
+        return this._data[index]; //TODO: what if timestamp is not in array
     }
 
     public get color(): Color {
@@ -74,5 +70,12 @@ export class ChartLine {
 
     public set isAutoScale(value: boolean) {
         this._isAutoScale = value;
+    }
+
+    public get lineData(): [Date, number][] {
+        return this._lineData;
+    }
+    public set lineData(value: [Date, number][]) {
+        this._lineData = value;
     }
 }

@@ -46,7 +46,7 @@ const zoom = (
     chart: LineChart
 ) => {
     chartStructure.zoomBrushGroup.call(chartStructure.zoomBrush.move, null);
-    chart.timeDomain = domain as Date[];
+    chart.timeDomain = domain;
     drawAxes(chartStructure, chart);
     drawLines(chartStructure, chart);
 };

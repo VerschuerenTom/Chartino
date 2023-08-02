@@ -5,8 +5,8 @@ export type TooltipData = {
 export declare class MouseTooltip {
     private _callback;
     private _positionCallback;
-    constructor(callback: (time: Date, pointData: TooltipData) => string);
-    get callback(): (time: Date, pointData: TooltipData) => string;
+    constructor(callback: (time: number, pointData: TooltipData) => string);
+    get callback(): (time: number, pointData: TooltipData) => string;
     get positionCallback(): (x: number, y: number) => {
         x: number;
         y: number;

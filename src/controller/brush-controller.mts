@@ -30,7 +30,7 @@ export const drawBrush = (chartStructure: ChartStructure, chart: LineChart) => {
             )
             .attr("class", "brush")
             .call(chartStructure.brush);
-        moveBrush(chartStructure, chart, chart.timeDomain as Date[]);
+        moveBrush(chartStructure, chart, chart.timeDomain as number[]);
         chart.brush?.domainLinker.subscribe((domain) =>
             moveBrush(chartStructure, chart, domain)
         );

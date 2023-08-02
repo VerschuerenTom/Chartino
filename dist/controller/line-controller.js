@@ -9,65 +9,62 @@ export const drawLines = (chartStructure, chart) => {
     chartStructure.linesGroup.selectAll("*").remove();
     const timeScale = chart.timeScale;
     const verticalScale = chart.verticalScale;
-    chart.getChartlines().forEach(chartLine => {
+    chart.getChartlines().forEach((chartLine) => {
         drawLine(timeScale, verticalScale, chartStructure, chartLine);
     });
 };
+const getAutoScaleData = (chartStructure, line, domain) => {
+    const timestamps = line.timestamps;
+    const lineData = [];
+    const data = [];
+    let lowestValue = null;
+    let highestValue = null;
+    for (let i = 0; i < timestamps.length; i++) {
+        if (timestamps[i - 1] > domain[1]) {
+            break;
+        }
+        if (timestamps[i + 1] > domain[0] || i === timestamps.length - 1) {
+            data.push(line.data[i]);
+            lineData.push([new Date(timestamps[i]), line.data[i]]);
+            highestValue = highestValue == null ? line.data[i] : Math.max(line.data[i], highestValue);
+            lowestValue = lowestValue == null ? line.data[i] : Math.min(line.data[i], lowestValue);
+        }
+    }
+    const verticalDomain = [lowestValue, highestValue];
+    if (verticalDomain.some((i) => i === null)) {
+        return null;
+    }
+    const verticalScale = d3
+        .scaleLinear()
+        .domain(verticalDomain)
+        .range([
+        chartStructure.chart.horizontalAxis.offset.top,
+        chartStructure.chart.getClientHeight() - chartStructure.chart.horizontalAxis.offset.bottom,
+        0,
+    ]);
+    return { lineData, data, verticalDomain, verticalScale };
+};
 //TODO: Refactor this
 function drawLine(timeScale, verticalScale, chartStructure, chartLine) {
+    let autoScaleData = null;
     if (chartLine.isAutoScale) {
-        const values = getFilteredData(chartLine, chartStructure.chart.timeDomain);
-        const verticalDomain = getVerticalDomain(values);
-        const updatedVerticalScale = d3.scaleLinear()
-            .domain(verticalDomain)
-            .range([chartStructure.chart.horizontalAxis.offset.top, chartStructure.chart.getClientHeight() - chartStructure.chart.horizontalAxis.offset.bottom, 0]);
-        const line = d3.line()
-            .defined((d) => !isNaN(d[1]))
-            .x((d) => {
-            return timeScale(d[0]);
-        })
-            .y(function (d) {
-            return updatedVerticalScale(d[1]);
-        })
-            .curve(d3.curveLinear);
-        chartStructure.linesGroup
-            .append("path")
-            .attr("fill", "none")
-            .datum(chartLine.dataEntries)
-            .attr("d", line)
-            .attr("stroke", chartLine.color);
+        autoScaleData = getAutoScaleData(chartStructure, chartLine, chartStructure.chart.timeDomain);
+        drawSvgLine(timeScale, autoScaleData === null || autoScaleData === void 0 ? void 0 : autoScaleData.verticalScale, chartStructure, autoScaleData === null || autoScaleData === void 0 ? void 0 : autoScaleData.lineData, chartLine.color);
     }
     else {
-        const line = d3.line()
-            .defined((d) => !isNaN(d[1]))
-            .x((d) => {
-            return timeScale(d[0]);
-        })
-            .y(function (d) {
-            return verticalScale(d[1]);
-        })
-            .curve(d3.curveLinear);
-        chartStructure.linesGroup
-            .append("path")
-            .attr("fill", "none")
-            .datum(chartLine.dataEntries)
-            .attr("d", line)
-            .attr("stroke", chartLine.color);
+        drawSvgLine(timeScale, verticalScale, chartStructure, chartLine.lineData, chartLine.color);
     }
 }
-const getVerticalDomain = (values) => {
-    const domain = d3.extent(Object.values(values));
-    return [parseInt(domain[0]), parseInt(domain[1])];
-};
-function getFilteredData(line, timeDomain) {
-    const startDate = timeDomain[0].getTime();
-    const endDate = timeDomain[1].getTime();
-    const filteredValues = {};
-    line.dataEntries.forEach(([key, value]) => {
-        const numberKey = parseInt(key);
-        if (numberKey >= startDate && numberKey <= endDate && !isNaN(value)) {
-            filteredValues[numberKey] = value;
-        }
-    });
-    return filteredValues;
+function drawSvgLine(timeScale, verticalScale, chartStructure, data, color) {
+    const line = d3
+        .line()
+        .defined((d) => !isNaN(d[1]))
+        .x((d) => {
+        return timeScale(d[0]);
+    })
+        .y(function (d) {
+        return verticalScale(d[1]);
+    })
+        .curve(d3.curveLinear);
+    chartStructure.linesGroup.append("path").attr("fill", "none").datum(data).attr("d", line).attr("stroke", color);
 }

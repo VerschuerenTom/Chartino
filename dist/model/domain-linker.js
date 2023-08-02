@@ -9,14 +9,14 @@ export class DomainLinker {
             this.domainFuture.length = 0;
         }
         this.domainHistory.push(domain);
-        this.subscribers.forEach(subscriber => subscriber(domain));
+        this.subscribers.forEach((subscriber) => subscriber(domain));
     }
     popDomain() {
         if (this.domainHistory.length > 1) {
             const poppedDomain = this.domainHistory.pop();
             this.domainFuture.push(poppedDomain);
             const domain = this.domainHistory.at(-1);
-            this.subscribers.forEach(subscriber => subscriber(domain));
+            this.subscribers.forEach((subscriber) => subscriber(domain));
             return domain;
         }
         else {
@@ -52,6 +52,6 @@ export class DomainLinker {
         this.subscribers = [...this.subscribers, subscriber];
     }
     unsubscribe(subscriber) {
-        this.subscribers = this.subscribers.filter(sub => sub !== subscriber);
+        this.subscribers = this.subscribers.filter((sub) => sub !== subscriber);
     }
 }

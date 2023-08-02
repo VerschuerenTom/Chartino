@@ -1,4 +1,4 @@
-export type Domain = [number, number] | Date[];
+export type Domain = number[];
 export type DomainSubscriber = (domain: Domain) => void;
 
 export class DomainLinker {

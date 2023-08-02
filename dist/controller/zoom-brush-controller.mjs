@@ -6,12 +6,19 @@ export const drawZoomBrush = (chartStructure, chart) => {
         return;
     }
     if (chartStructure.zoomBrush === undefined) {
-        chartStructure.zoomBrush = d3.brushX()
-            .extent([[0, 0], [chart.getClientWidth(), chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top]]);
+        chartStructure.zoomBrush = d3.brushX().extent([
+            [0, 0],
+            [
+                chart.getClientWidth(),
+                chart.getClientHeight() -
+                    chart.verticalAxis.offset.bottom -
+                    chart.verticalAxis.offset.top,
+            ],
+        ]);
         chart.zoomBrush.domainLinker.setFullDomain(chart.timeDomain);
         chartStructure.zoomBrush.on("end", (event) => onZoomBrush(event, chart));
         chartStructure.zoomBrushGroup = chartStructure.chartGroup
-            .append('g')
+            .append("g")
             .attr("class", "zoomBrush")
             .attr("transform", "translate(0," + chart.verticalAxis.offset.top + ")")
             .call(chartStructure.zoomBrush);
@@ -25,7 +32,9 @@ const zoom = (domain, chartStructure, chart) => {
     drawLines(chartStructure, chart);
 };
 const onZoomBrush = (event, chart) => {
-    if (event.mode !== "handle" || chart.zoomBrush === undefined || event.selection === null) {
+    if (event.mode !== "handle" ||
+        chart.zoomBrush === undefined ||
+        event.selection === null) {
         return;
     }
     const newDomain = event.selection.map(chart.timeScale.invert, chart.timeScale);

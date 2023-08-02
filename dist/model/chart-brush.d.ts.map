@@ -1,1 +1,1 @@
-{"version":3,"file":"chart-brush.d.ts","sourceRoot":"","sources":["../../src/model/chart-brush.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,oBAAoB,CAAC;AAElD,qBAAa,UAAU;IAEnB,OAAO,CAAC,aAAa,CAAe;gBAExB,YAAY,EAAE,YAAY;IAItC,IAAW,YAAY,IAAI,YAAY,CAEtC;CACJ"}
+{"version":3,"file":"chart-brush.d.ts","sourceRoot":"","sources":["../../src/model/chart-brush.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,oBAAoB,CAAC;AAElD,qBAAa,UAAU;IACnB,OAAO,CAAC,aAAa,CAAe;gBAExB,YAAY,EAAE,YAAY;IAItC,IAAW,YAAY,IAAI,YAAY,CAEtC;CACJ"}

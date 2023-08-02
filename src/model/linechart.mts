@@ -13,12 +13,12 @@ export class LineChart extends BaseChart {
     private _horizontalAxis: HorizontalAxis = defaultHorizontalAxis;
     private _verticalAxis: VerticalAxis = defaultVerticalAxis;
 
-    private _timeDomain: Date[] | undefined;
+    private _timeDomain: number[] | undefined;
     private _verticalDomain: number[] = [0, 0];
     private _timeScale: any;
     private _verticalScale: any;
 
-    private _timestamps: Date[] = [];
+    private _timestamps: number[] = [];
 
     private _tooltip: MouseTooltip | undefined;
     private _brush: ChartBrush | undefined;
@@ -76,11 +76,11 @@ export class LineChart extends BaseChart {
         this._verticalAxis = value;
     }
 
-    public get timeDomain(): Date[] | undefined {
+    public get timeDomain(): number[] | undefined {
         return this._timeDomain;
     }
 
-    public set timeDomain(value: Date[] | undefined) {
+    public set timeDomain(value: number[] | undefined) {
         if (value === undefined) return;
         this._timeDomain = value;
         this.timeScale = d3
@@ -123,7 +123,7 @@ export class LineChart extends BaseChart {
         this._verticalScale = value;
     }
 
-    public get timestamps(): Date[] {
+    public get timestamps(): number[] {
         return this._timestamps;
     }
 
