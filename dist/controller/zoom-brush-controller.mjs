@@ -10,9 +10,7 @@ export const drawZoomBrush = (chartStructure, chart) => {
             [0, 0],
             [
                 chart.getClientWidth(),
-                chart.getClientHeight() -
-                    chart.verticalAxis.offset.bottom -
-                    chart.verticalAxis.offset.top,
+                chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top,
             ],
         ]);
         chart.zoomBrush.domainLinker.setFullDomain(chart.timeDomain);
@@ -32,9 +30,7 @@ const zoom = (domain, chartStructure, chart) => {
     drawLines(chartStructure, chart);
 };
 const onZoomBrush = (event, chart) => {
-    if (event.mode !== "handle" ||
-        chart.zoomBrush === undefined ||
-        event.selection === null) {
+    if (event.mode !== "handle" || chart.zoomBrush === undefined || event.selection === null) {
         return;
     }
     const newDomain = event.selection.map(chart.timeScale.invert, chart.timeScale);

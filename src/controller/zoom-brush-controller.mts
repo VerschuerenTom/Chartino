@@ -5,10 +5,7 @@ import { Domain } from "../model/domain-linker.js";
 import { drawAxes } from "./axis-controller.js";
 import { drawLines } from "./line-controller.js";
 
-export const drawZoomBrush = (
-    chartStructure: ChartStructure,
-    chart: LineChart
-) => {
+export const drawZoomBrush = (chartStructure: ChartStructure, chart: LineChart) => {
     if (chart.zoomBrush === undefined) {
         return;
     }
@@ -17,34 +14,21 @@ export const drawZoomBrush = (
             [0, 0],
             [
                 chart.getClientWidth(),
-                chart.getClientHeight() -
-                    chart.verticalAxis.offset.bottom -
-                    chart.verticalAxis.offset.top,
+                chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top,
             ],
         ]);
         chart.zoomBrush.domainLinker.setFullDomain(chart.timeDomain as Domain);
-        chartStructure.zoomBrush.on("end", (event: any) =>
-            onZoomBrush(event, chart)
-        );
+        chartStructure.zoomBrush.on("end", (event: any) => onZoomBrush(event, chart));
         chartStructure.zoomBrushGroup = chartStructure.chartGroup
             .append("g")
             .attr("class", "zoomBrush")
-            .attr(
-                "transform",
-                "translate(0," + chart.verticalAxis.offset.top + ")"
-            )
+            .attr("transform", "translate(0," + chart.verticalAxis.offset.top + ")")
             .call(chartStructure.zoomBrush);
-        chart.zoomBrush.domainLinker.subscribe((domain: Domain) =>
-            zoom(domain, chartStructure, chart)
-        );
+        chart.zoomBrush.domainLinker.subscribe((domain: Domain) => zoom(domain, chartStructure, chart));
     }
 };
 
-const zoom = (
-    domain: Domain,
-    chartStructure: ChartStructure,
-    chart: LineChart
-) => {
+const zoom = (domain: Domain, chartStructure: ChartStructure, chart: LineChart) => {
     chartStructure.zoomBrushGroup.call(chartStructure.zoomBrush.move, null);
     chart.timeDomain = domain;
     drawAxes(chartStructure, chart);
@@ -52,16 +36,9 @@ const zoom = (
 };
 
 const onZoomBrush = (event: any, chart: LineChart) => {
-    if (
-        event.mode !== "handle" ||
-        chart.zoomBrush === undefined ||
-        event.selection === null
-    ) {
+    if (event.mode !== "handle" || chart.zoomBrush === undefined || event.selection === null) {
         return;
     }
-    const newDomain = event.selection.map(
-        chart.timeScale.invert,
-        chart.timeScale
-    ) as Domain;
+    const newDomain = event.selection.map(chart.timeScale.invert, chart.timeScale) as Domain;
     chart.zoomBrush.domainLinker.pushDomain(newDomain);
 };

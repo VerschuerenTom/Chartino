@@ -6,12 +6,10 @@ export const drawTooltip = (chartStructure: ChartStructure, chart: LineChart) =>
     if (chart.getChartlines().length === 0 || chart.tooltip === undefined) {
         return;
     }
-    const tooltipDiv = getTooltipDiv(chart);
+    //const tooltipDiv = getTooltipDiv(chart);
     chartStructure.chartGroup.append("g").style("pointer-events", "none");
-    chartStructure
-        .getSvg()
-        .on("pointerenter pointermove", (event: any) => onTooltip(event, chart, chartStructure))
-        .on("pointerleave", (event: any) => onTooltipLeave(event, chart, tooltipDiv));
+    chartStructure.getSvg().on("pointerenter pointermove", (event: any) => onTooltip(event, chart, chartStructure));
+    //.on("pointerleave", (event: any) => onTooltipLeave());
 };
 
 const onTooltip = (event: any, chart: LineChart, chartStructure: ChartStructure) => {
@@ -50,9 +48,7 @@ const onTooltip = (event: any, chart: LineChart, chartStructure: ChartStructure)
         .style("left", x + "px"); */
 };
 
-const onTooltipLeave = (event: any, chart: LineChart, tooltipDiv: any) => {
-    tooltipDiv.selectAll("*").remove();
-};
+//const onTooltipLeave = () => {};
 
 const getTooltipDiv = (chart: LineChart) => {
     const tooltipId = "tooltip-div-" + chart.getId();

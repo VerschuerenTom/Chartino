@@ -13,5 +13,6 @@
     "moduleResolution":"node16",
     //"noUnusedLocals": true,
     //"noUnusedParameters": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
 }
