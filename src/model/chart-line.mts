@@ -7,6 +7,7 @@ export class ChartLine {
     private _color: Color = "#000000";
     private _timeDomain: number[];
     private _isAutoScale: boolean = false;
+    private _verticalScale: any;
     private _lineData: [Date, number][] = [];
 
     private _verticalDomain: number[] = [0, 0];
@@ -77,5 +78,12 @@ export class ChartLine {
     }
     public set lineData(value: [Date, number][]) {
         this._lineData = value;
+    }
+
+    public get verticalScale() {
+        return this._verticalScale;
+    }
+    public set verticalScale(value) {
+        this._verticalScale = value;
     }
 }

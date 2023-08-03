@@ -1,6 +1,9 @@
 export class Tooltip {
     constructor(callback) {
-        this._positionCallback = (x, y) => ({ x, y });
+        this._positionCallback = (x, y) => ({
+            x: x + 10,
+            y: y + 10,
+        });
         this._callback = callback;
     }
     get callback() {

@@ -2,7 +2,7 @@ import { BaseChart } from "./basechart.js";
 import { ChartLine } from "./chart-line.mjs";
 import { HorizontalAxis } from "./horizontal-axis.js";
 import { VerticalAxis } from "./vertical-axis.js";
-import { MouseTooltip } from "./mouse-tooltip.js";
+import { Tooltip } from "./tooltip.js";
 import { ChartBrush } from "./chart-brush.js";
 import { ChartZoomBrush } from "./chart-zoom-brush.js";
 export declare class LineChart extends BaseChart {
@@ -19,11 +19,11 @@ export declare class LineChart extends BaseChart {
     private _zoomBrush;
     constructor(id: string);
     addChartLine(chartLine: ChartLine): LineChart;
-    setTooltip(tooltip: MouseTooltip): LineChart;
+    setTooltip(tooltip: Tooltip): LineChart;
     setBrush(brush: ChartBrush): LineChart;
     setZoom(zoomBrush: ChartZoomBrush): LineChart;
-    get tooltip(): MouseTooltip | undefined;
-    set tooltip(value: MouseTooltip | undefined);
+    get tooltip(): Tooltip | undefined;
+    set tooltip(value: Tooltip | undefined);
     getChartlines(): ChartLine[];
     get horizontalAxis(): HorizontalAxis;
     set horizontalAxis(value: HorizontalAxis);

@@ -7,10 +7,10 @@ export const drawTooltip = (chartStructure, chart) => {
     chartStructure.chartGroup.append("g").style("pointer-events", "none");
     chartStructure
         .getSvg()
-        .on("pointerenter pointermove", (event) => onTooltip(event, chart, tooltipDiv))
+        .on("pointerenter pointermove", (event) => onTooltip(event, chart, chartStructure))
         .on("pointerleave", (event) => onTooltipLeave(event, chart, tooltipDiv));
 };
-const onTooltip = (event, chart, tooltipDiv) => {
+const onTooltip = (event, chart, chartStructure) => {
     if (chart.tooltip === undefined) {
         return;
     }
@@ -19,12 +19,21 @@ const onTooltip = (event, chart, tooltipDiv) => {
     const intersectionPoint = d3.bisectCenter(timestamps, chart.timeScale.invert(verticalPointer));
     const currentTimestamp = timestamps[intersectionPoint];
     const tooltipData = chart.getChartlines().map((line) => {
+        const value = line.getValue(currentTimestamp);
         return {
-            value: line.getValue(currentTimestamp),
+            pointX: chart.timeScale(currentTimestamp),
+            pointY: chart.verticalScale(value),
+            timestamp: currentTimestamp,
+            value: value,
             color: line.color,
         };
     });
-    const presentation = chart.tooltip.callback(currentTimestamp, tooltipData);
+    chart.tooltip.callback(chartStructure.getSvg(), tooltipData, {
+        svgHeight: chart.getClientHeight(),
+        svgWidth: chart.getClientWidth(),
+        offset: chart.verticalAxis.offset,
+    });
+    /*const presentation = chart.tooltip.callback(currentTimestamp, tooltipData);
     tooltipDiv.selectAll("*").remove();
     const { x, y } = chart.tooltip.positionCallback(event.pageX, event.pageY);
     tooltipDiv
@@ -32,7 +41,7 @@ const onTooltip = (event, chart, tooltipDiv) => {
         .style("position", "fixed")
         .html(presentation)
         .style("top", y + "px")
-        .style("left", x + "px");
+        .style("left", x + "px"); */
 };
 const onTooltipLeave = (event, chart, tooltipDiv) => {
     tooltipDiv.selectAll("*").remove();

@@ -59,4 +59,10 @@ export class ChartLine {
     set lineData(value) {
         this._lineData = value;
     }
+    get verticalScale() {
+        return this._verticalScale;
+    }
+    set verticalScale(value) {
+        this._verticalScale = value;
+    }
 }

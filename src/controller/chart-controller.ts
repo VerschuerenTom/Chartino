@@ -41,11 +41,12 @@ export const drawLineChart = (lineChart: LineChart) => {
             .reduce((a, b) => {
                 return [Math.max(a[1], b[1]), Math.min(a[0], b[0])];
             });
+        lineChart.getChartlines().forEach((line) => {
+            line.verticalScale = lineChart.verticalScale;
+        });
     }
 };
 
 const isAlreadyInitialized = (id: string): boolean => {
-    return chartStructures
-        .map((structure) => structure.chart.getId())
-        .includes(id);
+    return chartStructures.map((structure) => structure.chart.getId()).includes(id);
 };

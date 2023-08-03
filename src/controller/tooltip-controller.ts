@@ -2,10 +2,7 @@ import { LineChart } from "../index.mjs";
 import { ChartStructure } from "../model/chart-structure.js";
 import * as d3 from "d3";
 
-export const drawTooltip = (
-    chartStructure: ChartStructure,
-    chart: LineChart
-) => {
+export const drawTooltip = (chartStructure: ChartStructure, chart: LineChart) => {
     if (chart.getChartlines().length === 0 || chart.tooltip === undefined) {
         return;
     }
@@ -13,34 +10,36 @@ export const drawTooltip = (
     chartStructure.chartGroup.append("g").style("pointer-events", "none");
     chartStructure
         .getSvg()
-        .on("pointerenter pointermove", (event: any) =>
-            onTooltip(event, chart, tooltipDiv)
-        )
-        .on("pointerleave", (event: any) =>
-            onTooltipLeave(event, chart, tooltipDiv)
-        );
+        .on("pointerenter pointermove", (event: any) => onTooltip(event, chart, chartStructure))
+        .on("pointerleave", (event: any) => onTooltipLeave(event, chart, tooltipDiv));
 };
 
-const onTooltip = (event: any, chart: LineChart, tooltipDiv: any) => {
+const onTooltip = (event: any, chart: LineChart, chartStructure: ChartStructure) => {
     if (chart.tooltip === undefined) {
         return;
     }
     const timestamps = chart.timestamps;
     const verticalPointer = d3.pointer(event)[0];
-    const intersectionPoint = d3.bisectCenter(
-        timestamps,
-        chart.timeScale.invert(verticalPointer)
-    );
+    const intersectionPoint = d3.bisectCenter(timestamps, chart.timeScale.invert(verticalPointer));
     const currentTimestamp = timestamps[intersectionPoint];
 
     const tooltipData = chart.getChartlines().map((line) => {
+        const value = line.getValue(currentTimestamp);
         return {
-            value: line.getValue(currentTimestamp),
+            pointX: chart.timeScale(currentTimestamp),
+            pointY: chart.verticalScale(value),
+            timestamp: currentTimestamp,
+            value: value,
             color: line.color,
         };
     });
 
-    const presentation = chart.tooltip.callback(currentTimestamp, tooltipData);
+    chart.tooltip.callback(chartStructure.getSvg(), tooltipData, {
+        svgHeight: chart.getClientHeight(),
+        svgWidth: chart.getClientWidth(),
+        offset: chart.verticalAxis.offset,
+    });
+    /*const presentation = chart.tooltip.callback(currentTimestamp, tooltipData);
     tooltipDiv.selectAll("*").remove();
     const { x, y } = chart.tooltip.positionCallback(event.pageX, event.pageY);
     tooltipDiv
@@ -48,7 +47,7 @@ const onTooltip = (event: any, chart: LineChart, tooltipDiv: any) => {
         .style("position", "fixed")
         .html(presentation)
         .style("top", y + "px")
-        .style("left", x + "px");
+        .style("left", x + "px"); */
 };
 
 const onTooltipLeave = (event: any, chart: LineChart, tooltipDiv: any) => {

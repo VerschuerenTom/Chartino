@@ -25,6 +25,7 @@ function drawLine(timeScale: any, verticalScale: any, chartStructure: ChartStruc
     let autoScaleData: AutoScaleData = null;
     if (chartLine.isAutoScale) {
         autoScaleData = getAutoScaleData(chartStructure, chartLine, chartStructure.chart.timeDomain as number[]);
+        chartLine.verticalScale = autoScaleData?.verticalScale;
         drawSvgLine(timeScale, autoScaleData?.verticalScale, chartStructure, autoScaleData?.lineData, chartLine.color);
     } else {
         drawSvgLine(timeScale, verticalScale, chartStructure, chartLine.lineData, chartLine.color);

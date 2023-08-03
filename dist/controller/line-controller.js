@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { getAutoScaleData } from "./autoscale-calculator.js";
 export const drawLines = (chartStructure, chart) => {
     if (chartStructure.chartGroup === undefined) {
         return;
@@ -13,42 +14,11 @@ export const drawLines = (chartStructure, chart) => {
         drawLine(timeScale, verticalScale, chartStructure, chartLine);
     });
 };
-const getAutoScaleData = (chartStructure, line, domain) => {
-    const timestamps = line.timestamps;
-    const lineData = [];
-    const data = [];
-    let lowestValue = null;
-    let highestValue = null;
-    for (let i = 0; i < timestamps.length; i++) {
-        if (timestamps[i - 1] > domain[1]) {
-            break;
-        }
-        if (timestamps[i + 1] > domain[0] || i === timestamps.length - 1) {
-            data.push(line.data[i]);
-            lineData.push([new Date(timestamps[i]), line.data[i]]);
-            highestValue = highestValue == null ? line.data[i] : Math.max(line.data[i], highestValue);
-            lowestValue = lowestValue == null ? line.data[i] : Math.min(line.data[i], lowestValue);
-        }
-    }
-    const verticalDomain = [lowestValue, highestValue];
-    if (verticalDomain.some((i) => i === null)) {
-        return null;
-    }
-    const verticalScale = d3
-        .scaleLinear()
-        .domain(verticalDomain)
-        .range([
-        chartStructure.chart.horizontalAxis.offset.top,
-        chartStructure.chart.getClientHeight() - chartStructure.chart.horizontalAxis.offset.bottom,
-        0,
-    ]);
-    return { lineData, data, verticalDomain, verticalScale };
-};
-//TODO: Refactor this
 function drawLine(timeScale, verticalScale, chartStructure, chartLine) {
     let autoScaleData = null;
     if (chartLine.isAutoScale) {
         autoScaleData = getAutoScaleData(chartStructure, chartLine, chartStructure.chart.timeDomain);
+        chartLine.verticalScale = autoScaleData === null || autoScaleData === void 0 ? void 0 : autoScaleData.verticalScale;
         drawSvgLine(timeScale, autoScaleData === null || autoScaleData === void 0 ? void 0 : autoScaleData.verticalScale, chartStructure, autoScaleData === null || autoScaleData === void 0 ? void 0 : autoScaleData.lineData, chartLine.color);
     }
     else {

@@ -5,6 +5,7 @@ export declare class ChartLine {
     private _color;
     private _timeDomain;
     private _isAutoScale;
+    private _verticalScale;
     private _lineData;
     private _verticalDomain;
     constructor(timestamps: number[], data: number[]);
@@ -22,5 +23,7 @@ export declare class ChartLine {
     set isAutoScale(value: boolean);
     get lineData(): [Date, number][];
     set lineData(value: [Date, number][]);
+    get verticalScale(): any;
+    set verticalScale(value: any);
 }
 //# sourceMappingURL=chart-line.d.mts.map

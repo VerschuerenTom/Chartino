@@ -4,7 +4,7 @@ import { BaseChart } from "./basechart.js";
 import { ChartLine } from "./chart-line.mjs";
 import { HorizontalAxis, defaultHorizontalAxis } from "./horizontal-axis.js";
 import { VerticalAxis, defaultVerticalAxis } from "./vertical-axis.js";
-import { MouseTooltip } from "./mouse-tooltip.js";
+import { Tooltip } from "./tooltip.js";
 import { ChartBrush } from "./chart-brush.js";
 import { ChartZoomBrush } from "./chart-zoom-brush.js";
 
@@ -20,7 +20,7 @@ export class LineChart extends BaseChart {
 
     private _timestamps: number[] = [];
 
-    private _tooltip: MouseTooltip | undefined;
+    private _tooltip: Tooltip | undefined;
     private _brush: ChartBrush | undefined;
     private _zoomBrush: ChartZoomBrush | undefined;
 
@@ -34,7 +34,7 @@ export class LineChart extends BaseChart {
         return this;
     }
 
-    public setTooltip(tooltip: MouseTooltip): LineChart {
+    public setTooltip(tooltip: Tooltip): LineChart {
         this._tooltip = tooltip;
         return this;
     }
@@ -49,10 +49,10 @@ export class LineChart extends BaseChart {
         return this;
     }
 
-    public get tooltip(): MouseTooltip | undefined {
+    public get tooltip(): Tooltip | undefined {
         return this._tooltip;
     }
-    public set tooltip(value: MouseTooltip | undefined) {
+    public set tooltip(value: Tooltip | undefined) {
         this._tooltip = value;
     }
 
@@ -86,10 +86,7 @@ export class LineChart extends BaseChart {
         this.timeScale = d3
             .scaleTime()
             .domain(value)
-            .range([
-                this.horizontalAxis.offset.left,
-                this.getClientWidth() - this.horizontalAxis.offset.right,
-            ]);
+            .range([this.horizontalAxis.offset.left, this.getClientWidth() - this.horizontalAxis.offset.right]);
     }
 
     public get verticalDomain(): number[] {
@@ -101,10 +98,7 @@ export class LineChart extends BaseChart {
         this.verticalScale = d3
             .scaleLinear()
             .domain(this._verticalDomain)
-            .range([
-                this.horizontalAxis.offset.top,
-                this.getClientHeight() - this.horizontalAxis.offset.bottom,
-            ]);
+            .range([this.horizontalAxis.offset.top, this.getClientHeight() - this.horizontalAxis.offset.bottom]);
     }
 
     public get timeScale(): any {
