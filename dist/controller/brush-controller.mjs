@@ -23,6 +23,7 @@ export const drawBrush = (chartStructure, chart) => {
             .call(chartStructure.brush);
         moveBrush(chartStructure, chart, chart.timeDomain);
         (_a = chart.brush) === null || _a === void 0 ? void 0 : _a.domainLinker.subscribe((domain) => moveBrush(chartStructure, chart, domain));
+        moveBrush(chartStructure, chart, chart.brush.domainLinker.getCurrentDomain());
     }
 };
 const moveBrush = (chartStructure, chart, domain) => {

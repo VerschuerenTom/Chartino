@@ -7,6 +7,7 @@ export declare class DomainLinker {
     constructor();
     pushDomain(domain: Domain, resetFutures?: boolean): void;
     popDomain(): Domain;
+    getCurrentDomain(): Domain;
     unpopDomain(): Domain;
     hasDomainHistory(): boolean;
     hasDomainFutures(): boolean;

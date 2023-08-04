@@ -6,7 +6,7 @@ export class BaseChart {
         return this.getElement().clientHeight;
     }
     getClientWidth() {
-        return this.getElement().clientWidth;
+        return window.innerWidth;
     }
     getElement() {
         const el = document.getElementById(this.id);

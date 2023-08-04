@@ -28,6 +28,10 @@ export class DomainLinker {
         }
     }
 
+    public getCurrentDomain(): Domain {
+        return this.domainHistory.at(-1) as Domain;
+    }
+
     public unpopDomain(): Domain {
         if (this.domainFuture.length > 0) {
             const newDomain = this.domainFuture.pop() as Domain;

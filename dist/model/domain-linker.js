@@ -23,6 +23,9 @@ export class DomainLinker {
             return this.domainHistory[0];
         }
     }
+    getCurrentDomain() {
+        return this.domainHistory.at(-1);
+    }
     unpopDomain() {
         if (this.domainFuture.length > 0) {
             const newDomain = this.domainFuture.pop();

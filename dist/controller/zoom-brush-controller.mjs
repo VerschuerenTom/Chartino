@@ -20,6 +20,7 @@ export const drawZoomBrush = (chartStructure, chart) => {
             .attr("transform", "translate(0," + chart.offsets.top + ")")
             .call(chartStructure.zoomBrush);
         chart.zoomBrush.domainLinker.subscribe((domain) => zoom(domain, chartStructure, chart));
+        zoom(chart.zoomBrush.domainLinker.getCurrentDomain(), chartStructure, chart);
     }
 };
 const zoom = (domain, chartStructure, chart) => {

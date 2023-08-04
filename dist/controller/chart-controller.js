@@ -7,9 +7,10 @@ import { drawZoomBrush } from "./zoom-brush-controller.mjs";
 import { drawClip } from "./clip-controller.js";
 const chartStructures = [];
 export const drawLineChart = (lineChart) => {
-    if (isAlreadyInitialized(lineChart.getId())) {
+    console.log("client-width:" + lineChart.getClientWidth());
+    /*if (isAlreadyInitialized(lineChart.getId())) {
         return;
-    }
+    } */
     clearSvg(lineChart.getId());
     const chartStructure = initChartStructure(lineChart);
     chartStructures.push(chartStructure);

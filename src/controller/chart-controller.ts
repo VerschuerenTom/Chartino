@@ -12,9 +12,10 @@ import { drawClip } from "./clip-controller.js";
 const chartStructures: ChartStructure[] = [];
 
 export const drawLineChart = (lineChart: LineChart) => {
-    if (isAlreadyInitialized(lineChart.getId())) {
+    console.log("client-width:" + lineChart.getClientWidth());
+    /*if (isAlreadyInitialized(lineChart.getId())) {
         return;
-    }
+    } */
     clearSvg(lineChart.getId());
     const chartStructure: ChartStructure = initChartStructure(lineChart);
     chartStructures.push(chartStructure);

@@ -24,6 +24,7 @@ export const drawZoomBrush = (chartStructure: ChartStructure, chart: LineChart) 
             .attr("transform", "translate(0," + chart.offsets.top + ")")
             .call(chartStructure.zoomBrush);
         chart.zoomBrush.domainLinker.subscribe((domain: Domain) => zoom(domain, chartStructure, chart));
+        zoom(chart.zoomBrush.domainLinker.getCurrentDomain(), chartStructure, chart);
     }
 };
 

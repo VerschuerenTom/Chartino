@@ -10,7 +10,7 @@ export class BaseChart {
     }
 
     public getClientWidth(): number {
-        return this.getElement().clientWidth;
+        return window.innerWidth;
     }
 
     private getElement() {
