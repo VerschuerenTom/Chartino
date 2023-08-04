@@ -42,26 +42,142 @@ const onBrush = (event, chart, structure) => {
     if (event.selection === null) {
         return;
     }
+    const timeDomain = event.selection.map(chart.timeScale.invert, chart.timeScale);
     //const sx = event.selection.map(chart.timeScale.invert);
     structure.getSvg().selectAll(".testing").remove();
+    const path = d3.path();
+    path.moveTo(chart.verticalAxis.offset.left, 0);
+    path.lineTo(event.selection[0], 0);
+    path.lineTo(event.selection[0], chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top);
+    path.lineTo(event.selection[1], chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top);
+    path.lineTo(event.selection[1], 0);
+    path.lineTo(chart.getClientWidth() - chart.horizontalAxis.offset.right, 0);
     structure
         .getSvg()
+        .select(".chartTwo-brush")
+        .append("path")
+        .data([type("selection")])
+        .attr("cursor", "move")
+        .attr("class", "testing")
+        .attr("d", path)
+        .style("fill", "none")
+        .style("stroke", "black");
+    structure
+        .getSvg()
+        .selectAll(".chartTwo-brush")
         .append("rect")
         .attr("class", "testing")
+        .data([type("overlay")])
+        .attr("cursor", "crosshair")
         .attr("x", chart.verticalAxis.offset.left)
-        .attr("y", chart.verticalAxis.offset.top)
+        .attr("y", 0)
         .attr("width", event.selection[0] - chart.verticalAxis.offset.left)
         .attr("height", chart.getClientHeight() - chart.horizontalAxis.offset.bottom - chart.verticalAxis.offset.top)
         .style("fill", "grey")
         .style("fill-opacity", "50%");
     structure
         .getSvg()
+        .selectAll(".chartTwo-brush")
         .append("rect")
         .attr("class", "testing")
+        .data([type("overlay")])
+        .attr("cursor", "crosshair")
         .attr("x", event.selection[1])
-        .attr("y", chart.verticalAxis.offset.top)
+        .attr("y", 0)
         .attr("width", chart.getClientWidth() - event.selection[1] - chart.horizontalAxis.offset.right)
         .attr("height", chart.getClientHeight() - chart.horizontalAxis.offset.bottom - chart.verticalAxis.offset.top)
         .style("fill", "grey")
         .style("fill-opacity", "50%");
+    /*structure
+        .getSvg()
+        .selectAll(".handle--w")
+        .attr("y", (chart.getClientHeight() - chart.verticalAxis.offset.top - chart.verticalAxis.offset.bottom) / 4)
+        .attr("x", event.selection[0] - 10)
+        .attr("rx", 3)
+        .attr("ry", 3)
+        .attr("width", 20)
+        .attr(
+            "height",
+            (chart.getClientHeight() - chart.verticalAxis.offset.top - chart.verticalAxis.offset.bottom) / 2
+        )
+        .style("visibility", "visible")
+        .style("fill", "white")
+        .style("stroke", "black"); */
+    structure
+        .getSvg()
+        .select(".chartTwo-brush")
+        .append("rect")
+        .attr("class", "handle handle--w testing")
+        .data([type("w")])
+        .attr("cursor", "ew-resize")
+        .attr("y", (chart.getClientHeight() - chart.verticalAxis.offset.top - chart.verticalAxis.offset.bottom) / 4)
+        .attr("x", event.selection[0] - 10)
+        .attr("rx", 3)
+        .attr("ry", 3)
+        .attr("width", 20)
+        .attr("height", (chart.getClientHeight() - chart.verticalAxis.offset.top - chart.verticalAxis.offset.bottom) / 2)
+        .style("visibility", "visible")
+        .style("fill", "white")
+        .style("stroke", "black");
+    structure
+        .getSvg()
+        .select(".chartTwo-brush")
+        .append("rect")
+        .attr("class", "handle handle--e testing")
+        .data([type("e")])
+        .attr("cursor", "ew-resize")
+        .attr("y", (chart.getClientHeight() - chart.verticalAxis.offset.top - chart.verticalAxis.offset.bottom) / 4)
+        .attr("x", event.selection[1] - 10)
+        .attr("rx", 3)
+        .attr("ry", 3)
+        .attr("width", 20)
+        .attr("height", (chart.getClientHeight() - chart.verticalAxis.offset.top - chart.verticalAxis.offset.bottom) / 2)
+        .style("visibility", "visible")
+        .style("fill", "white")
+        .style("stroke", "black");
+    structure
+        .getSvg()
+        .append("rect")
+        .attr("class", "testing")
+        .attr("x", event.selection[0] - 50)
+        .attr("y", chart.getClientHeight() - chart.verticalAxis.offset.bottom)
+        .attr("width", 100)
+        .attr("height", 18)
+        .attr("rx", 3)
+        .attr("ry", 3)
+        .style("fill", "black");
+    structure
+        .getSvg()
+        .append("text")
+        .attr("class", "testing")
+        .attr("x", event.selection[0] - 45)
+        .attr("y", chart.getClientHeight() - chart.verticalAxis.offset.bottom + 12)
+        .text(new Date(timeDomain[0]).toLocaleString("nl-be"))
+        .style("fill", "white")
+        .style("font-size", "11px")
+        .style("font-weight", "500");
+    structure
+        .getSvg()
+        .append("rect")
+        .attr("class", "testing")
+        .attr("x", event.selection[1] - 50)
+        .attr("y", chart.getClientHeight() - chart.verticalAxis.offset.bottom)
+        .attr("width", 100)
+        .attr("height", 18)
+        .attr("rx", 3)
+        .attr("ry", 3)
+        .style("fill", "black");
+    structure
+        .getSvg()
+        .append("text")
+        .attr("class", "testing")
+        .attr("x", event.selection[1] - 45)
+        .attr("y", chart.getClientHeight() - chart.verticalAxis.offset.bottom + 12)
+        .text(new Date(timeDomain[1]).toLocaleString("nl-be"))
+        .style("fill", "white")
+        .style("font-size", "11px")
+        .style("font-weight", "500");
 };
+function type(t) {
+    return { type: t };
+}

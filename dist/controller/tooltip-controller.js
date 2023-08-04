@@ -3,7 +3,7 @@ export const drawTooltip = (chartStructure, chart) => {
     if (chart.getChartlines().length === 0 || chart.tooltip === undefined) {
         return;
     }
-    const tooltipDiv = getTooltipDiv(chart);
+    //const tooltipDiv = getTooltipDiv(chart);
     chartStructure.chartGroup.append("g").style("pointer-events", "none");
     chartStructure.getSvg().on("pointerenter pointermove", (event) => onTooltip(event, chart, chartStructure));
     //.on("pointerleave", (event: any) => onTooltipLeave());
