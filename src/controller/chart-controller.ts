@@ -9,16 +9,9 @@ import { drawBrush } from "./brush-controller.mjs";
 import { drawZoomBrush } from "./zoom-brush-controller.mjs";
 import { drawClip } from "./clip-controller.js";
 
-const chartStructures: ChartStructure[] = [];
-
 export const drawLineChart = (lineChart: LineChart) => {
-    console.log("client-width:" + lineChart.getClientWidth());
-    /*if (isAlreadyInitialized(lineChart.getId())) {
-        return;
-    } */
     clearSvg(lineChart.getId());
     const chartStructure: ChartStructure = initChartStructure(lineChart);
-    chartStructures.push(chartStructure);
     const chartlines: ChartLine[] = lineChart.getChartlines();
     calculateDomains();
 
@@ -46,8 +39,4 @@ export const drawLineChart = (lineChart: LineChart) => {
             line.verticalScale = lineChart.verticalScale;
         });
     }
-};
-
-const isAlreadyInitialized = (id: string): boolean => {
-    return chartStructures.map((structure) => structure.chart.getId()).includes(id);
 };
