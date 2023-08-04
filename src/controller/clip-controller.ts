@@ -7,22 +7,9 @@ export const drawClip = (chartStructure: ChartStructure, chart: LineChart) => {
         .append("svg:clipPath")
         .attr("id", "clip" + chart.getId())
         .append("svg:rect")
-        .attr(
-            "width",
-            chart.getClientWidth() -
-                chart.verticalAxis.offset.right -
-                chart.verticalAxis.offset.left
-        )
-        .attr(
-            "height",
-            chart.getClientHeight() -
-                chart.horizontalAxis.offset.bottom -
-                chart.horizontalAxis.offset.top
-        )
-        .attr("x", chart.verticalAxis.offset.left)
-        .attr("y", chart.horizontalAxis.offset.top);
-    chartStructure.linesGroup.attr(
-        "clip-path",
-        "url(#clip" + chart.getId() + ")"
-    );
+        .attr("width", chart.getClientWidth() - chart.offsets.right - chart.offsets.left)
+        .attr("height", chart.getClientHeight() - chart.offsets.bottom - chart.offsets.top)
+        .attr("x", chart.offsets.left)
+        .attr("y", chart.offsets.top);
+    chartStructure.linesGroup.attr("clip-path", "url(#clip" + chart.getId() + ")");
 };

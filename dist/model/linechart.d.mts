@@ -5,10 +5,17 @@ import { VerticalAxis } from "./vertical-axis.js";
 import { Tooltip } from "./tooltip.js";
 import { ChartBrush } from "./chart-brush.js";
 import { ChartZoomBrush } from "./chart-zoom-brush.js";
+type Offsets = {
+    top: number;
+    bottom: number;
+    right: number;
+    left: number;
+};
 export declare class LineChart extends BaseChart {
     private chartLines;
     private _horizontalAxis;
     private _verticalAxis;
+    offsets: Offsets;
     private _timeDomain;
     private _verticalDomain;
     private _timeScale;
@@ -44,4 +51,5 @@ export declare class LineChart extends BaseChart {
     set zoomBrush(value: ChartZoomBrush | undefined);
     draw(): void;
 }
+export {};
 //# sourceMappingURL=linechart.d.mts.map

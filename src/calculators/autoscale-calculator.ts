@@ -35,8 +35,8 @@ export const getAutoScaleData = (chartStructure: ChartStructure, line: ChartLine
         .scaleLinear()
         .domain(verticalDomain as number[])
         .range([
-            chartStructure.chart.horizontalAxis.offset.top,
-            chartStructure.chart.getClientHeight() - chartStructure.chart.horizontalAxis.offset.bottom,
+            chartStructure.chart.offsets.top,
+            chartStructure.chart.getClientHeight() - chartStructure.chart.offsets.bottom,
             0,
         ]);
     return { lineData, data, verticalDomain, verticalScale };

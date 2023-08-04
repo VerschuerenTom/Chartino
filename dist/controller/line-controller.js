@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { getAutoScaleData } from "./autoscale-calculator.js";
+import { getAutoScaleData } from "../calculators/autoscale-calculator.js";
 export const drawLines = (chartStructure, chart) => {
     if (chartStructure.chartGroup === undefined) {
         return;

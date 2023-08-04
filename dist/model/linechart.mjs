@@ -9,6 +9,7 @@ export class LineChart extends BaseChart {
         this.chartLines = [];
         this._horizontalAxis = defaultHorizontalAxis;
         this._verticalAxis = defaultVerticalAxis;
+        this.offsets = { top: 50, bottom: 50, left: 50, right: 50 };
         this._verticalDomain = [0, 0];
         this._timestamps = [];
     }
@@ -60,7 +61,7 @@ export class LineChart extends BaseChart {
         this.timeScale = d3
             .scaleTime()
             .domain(value)
-            .range([this.horizontalAxis.offset.left, this.getClientWidth() - this.horizontalAxis.offset.right]);
+            .range([this.offsets.left, this.getClientWidth() - this.offsets.right]);
     }
     get verticalDomain() {
         return this._verticalDomain;
@@ -70,7 +71,7 @@ export class LineChart extends BaseChart {
         this.verticalScale = d3
             .scaleLinear()
             .domain(this._verticalDomain)
-            .range([this.horizontalAxis.offset.top, this.getClientHeight() - this.horizontalAxis.offset.bottom]);
+            .range([this.offsets.top, this.getClientHeight() - this.offsets.bottom]);
     }
     get timeScale() {
         return this._timeScale;

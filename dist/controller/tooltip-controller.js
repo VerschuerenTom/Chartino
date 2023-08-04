@@ -29,27 +29,6 @@ const onTooltip = (event, chart, chartStructure) => {
     chart.tooltip.callback(chartStructure.getSvg(), tooltipData, {
         svgHeight: chart.getClientHeight(),
         svgWidth: chart.getClientWidth(),
-        offset: chart.verticalAxis.offset,
+        offset: chart.offsets,
     });
-    /*const presentation = chart.tooltip.callback(currentTimestamp, tooltipData);
-    tooltipDiv.selectAll("*").remove();
-    const { x, y } = chart.tooltip.positionCallback(event.pageX, event.pageY);
-    tooltipDiv
-        .append("div")
-        .style("position", "fixed")
-        .html(presentation)
-        .style("top", y + "px")
-        .style("left", x + "px"); */
-};
-//const onTooltipLeave = () => {};
-const getTooltipDiv = (chart) => {
-    const tooltipId = "tooltip-div-" + chart.getId();
-    let tooltipDiv;
-    if (document.getElementById(tooltipId) === null) {
-        tooltipDiv = document.createElement("div");
-        tooltipDiv.setAttribute("id", tooltipId);
-        document.body.appendChild(tooltipDiv);
-        tooltipDiv = d3.select("#" + tooltipId);
-        return tooltipDiv;
-    }
 };

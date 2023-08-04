@@ -8,10 +8,13 @@ import { Tooltip } from "./tooltip.js";
 import { ChartBrush } from "./chart-brush.js";
 import { ChartZoomBrush } from "./chart-zoom-brush.js";
 
+type Offsets = { top: number; bottom: number; right: number; left: number };
+
 export class LineChart extends BaseChart {
     private chartLines: ChartLine[] = [];
     private _horizontalAxis: HorizontalAxis = defaultHorizontalAxis;
     private _verticalAxis: VerticalAxis = defaultVerticalAxis;
+    public offsets: Offsets = { top: 50, bottom: 50, left: 50, right: 50 };
 
     private _timeDomain: number[] | undefined;
     private _verticalDomain: number[] = [0, 0];
@@ -86,7 +89,7 @@ export class LineChart extends BaseChart {
         this.timeScale = d3
             .scaleTime()
             .domain(value)
-            .range([this.horizontalAxis.offset.left, this.getClientWidth() - this.horizontalAxis.offset.right]);
+            .range([this.offsets.left, this.getClientWidth() - this.offsets.right]);
     }
 
     public get verticalDomain(): number[] {
@@ -98,7 +101,7 @@ export class LineChart extends BaseChart {
         this.verticalScale = d3
             .scaleLinear()
             .domain(this._verticalDomain)
-            .range([this.horizontalAxis.offset.top, this.getClientHeight() - this.horizontalAxis.offset.bottom]);
+            .range([this.offsets.top, this.getClientHeight() - this.offsets.bottom]);
     }
 
     public get timeScale(): any {

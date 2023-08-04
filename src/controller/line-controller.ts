@@ -2,7 +2,7 @@ import { ChartLine, LineChart } from "../index.mjs";
 import { ChartStructure } from "../model/chart-structure.js";
 import * as d3 from "d3";
 import { Color } from "../model/color.js";
-import { AutoScaleData, getAutoScaleData } from "./autoscale-calculator.js";
+import { AutoScaleData, getAutoScaleData } from "../calculators/autoscale-calculator.js";
 
 export const drawLines = (chartStructure: ChartStructure, chart: LineChart) => {
     if (chartStructure.chartGroup === undefined) {

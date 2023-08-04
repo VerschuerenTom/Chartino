@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import { drawAxes } from "./axis-controller.js";
 import { drawLines } from "./line-controller.js";
+import { getTimeDifferenceString } from "../calculators/time-calculator.js";
 export const drawZoomBrush = (chartStructure, chart) => {
     if (chart.zoomBrush === undefined) {
         return;
@@ -8,10 +9,7 @@ export const drawZoomBrush = (chartStructure, chart) => {
     if (chartStructure.zoomBrush === undefined) {
         chartStructure.zoomBrush = d3.brushX().extent([
             [0, 0],
-            [
-                chart.getClientWidth(),
-                chart.getClientHeight() - chart.verticalAxis.offset.bottom - chart.verticalAxis.offset.top,
-            ],
+            [chart.getClientWidth(), chart.getClientHeight() - chart.offsets.bottom - chart.offsets.top],
         ]);
         chart.zoomBrush.domainLinker.setFullDomain(chart.timeDomain);
         chartStructure.zoomBrush.on("end", (event) => onZoomBrushEnd(event, chart, chartStructure));
@@ -19,7 +17,7 @@ export const drawZoomBrush = (chartStructure, chart) => {
         chartStructure.zoomBrushGroup = chartStructure.chartGroup
             .append("g")
             .attr("class", "zoomBrush")
-            .attr("transform", "translate(0," + chart.verticalAxis.offset.top + ")")
+            .attr("transform", "translate(0," + chart.offsets.top + ")")
             .call(chartStructure.zoomBrush);
         chart.zoomBrush.domainLinker.subscribe((domain) => zoom(domain, chartStructure, chart));
     }
@@ -49,7 +47,7 @@ const onZoomBrush = (event, chart, structure) => {
         .append("rect")
         .attr("class", "testing2")
         .attr("x", event.selection[0] - 50)
-        .attr("y", chart.getClientHeight() - chart.verticalAxis.offset.bottom)
+        .attr("y", chart.getClientHeight() - chart.offsets.bottom)
         .attr("width", 100)
         .attr("height", 18)
         .attr("rx", 3)
@@ -60,7 +58,7 @@ const onZoomBrush = (event, chart, structure) => {
         .append("text")
         .attr("class", "testing2")
         .attr("x", event.selection[0] - 45)
-        .attr("y", chart.getClientHeight() - chart.verticalAxis.offset.bottom + 12)
+        .attr("y", chart.getClientHeight() - chart.offsets.bottom + 12)
         .text(new Date(newDomain[0]).toLocaleString("nl-be"))
         .style("fill", "white")
         .style("font-size", "11px")
@@ -70,7 +68,7 @@ const onZoomBrush = (event, chart, structure) => {
         .append("rect")
         .attr("class", "testing2")
         .attr("x", event.selection[1] - 50)
-        .attr("y", chart.verticalAxis.offset.top - 17)
+        .attr("y", chart.offsets.top - 17)
         .attr("width", 100)
         .attr("height", 18)
         .attr("rx", 3)
@@ -81,7 +79,7 @@ const onZoomBrush = (event, chart, structure) => {
         .append("text")
         .attr("class", "testing2")
         .attr("x", event.selection[1] - 45)
-        .attr("y", chart.verticalAxis.offset.top - 5)
+        .attr("y", chart.offsets.top - 5)
         .text(new Date(newDomain[1]).toLocaleString("nl-be"))
         .style("fill", "white")
         .style("font-size", "11px")
@@ -91,7 +89,7 @@ const onZoomBrush = (event, chart, structure) => {
         .append("rect")
         .attr("class", "testing2")
         .attr("x", event.selection[1] - 50)
-        .attr("y", chart.verticalAxis.offset.top + 2)
+        .attr("y", chart.offsets.top + 2)
         .attr("width", 100)
         .attr("height", 18)
         .attr("rx", 3)
@@ -102,36 +100,9 @@ const onZoomBrush = (event, chart, structure) => {
         .append("text")
         .attr("class", "testing2")
         .attr("x", event.selection[1] - 45)
-        .attr("y", chart.verticalAxis.offset.top + 14)
-        .text(getTimeDifference(newDomain[0], newDomain[1]))
+        .attr("y", chart.offsets.top + 14)
+        .text(getTimeDifferenceString(newDomain[0], newDomain[1]))
         .style("fill", "white")
         .style("font-size", "11px")
         .style("font-weight", "500");
 };
-function getTimeDifference(start, end) {
-    const timeDifferenceInSeconds = Math.abs((end - start) / 1000);
-    const days = Math.floor(timeDifferenceInSeconds / (60 * 60 * 24));
-    const hours = Math.floor((timeDifferenceInSeconds % (60 * 60 * 24)) / (60 * 60));
-    const minutes = Math.floor((timeDifferenceInSeconds % (60 * 60)) / 60);
-    const seconds = Math.floor(timeDifferenceInSeconds % 60);
-    let result = "";
-    let count = 0;
-    if (days > 0 && count < 2) {
-        result += `${days} days, `;
-        count++;
-    }
-    if (hours > 0 && count < 2) {
-        result += `${hours} hours, `;
-        count++;
-    }
-    if (minutes > 0 && count < 2) {
-        result += `${minutes} min, `;
-        count++;
-    }
-    if (seconds > 0 && count < 2) {
-        result += `${seconds} sec`;
-    }
-    // Remove trailing comma and space
-    result = result.replace(/, $/, "");
-    return result;
-}

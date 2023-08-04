@@ -6,34 +6,26 @@ import { VerticalAxis } from "../model/vertical-axis.js";
 
 export const drawAxes = (chartStructure: ChartStructure, chart: LineChart) => {
     const vAxis = chart.verticalAxis;
-    const height = chart.getClientHeight() - vAxis.offset.bottom;
+    const height = chart.getClientHeight() - chart.offsets.bottom;
     drawVerticalAxis(chartStructure, height, chart);
     drawHorizontalAxis(chartStructure, vAxis, chart);
 };
 
-function drawHorizontalAxis(
-    chartStructure: ChartStructure,
-    vAxis: VerticalAxis,
-    chart: LineChart
-) {
+function drawHorizontalAxis(chartStructure: ChartStructure, vAxis: VerticalAxis, chart: LineChart) {
     if (!chart.horizontalAxis.isEnabled) {
         return;
     }
     if (chartStructure.verticalAxisGroup === undefined) {
         chartStructure.verticalAxisGroup = chartStructure.chartGroup
             .append("g")
-            .attr("transform", "translate(" + vAxis.offset.left + ", 0)");
+            .attr("transform", "translate(" + chart.offsets.left + ", 0)");
     }
     chartStructure.verticalAxisGroup.selectAll("*").remove();
     const verticalAxis = d3.axisLeft(chart.verticalScale);
     chartStructure.verticalAxisGroup.call(verticalAxis);
 }
 
-function drawVerticalAxis(
-    chartStructure: ChartStructure,
-    height: number,
-    chart: LineChart
-) {
+function drawVerticalAxis(chartStructure: ChartStructure, height: number, chart: LineChart) {
     if (!chart.verticalAxis.isEnabled) {
         return;
     }

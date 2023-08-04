@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 export const drawAxes = (chartStructure, chart) => {
     const vAxis = chart.verticalAxis;
-    const height = chart.getClientHeight() - vAxis.offset.bottom;
+    const height = chart.getClientHeight() - chart.offsets.bottom;
     drawVerticalAxis(chartStructure, height, chart);
     drawHorizontalAxis(chartStructure, vAxis, chart);
 };
@@ -12,7 +12,7 @@ function drawHorizontalAxis(chartStructure, vAxis, chart) {
     if (chartStructure.verticalAxisGroup === undefined) {
         chartStructure.verticalAxisGroup = chartStructure.chartGroup
             .append("g")
-            .attr("transform", "translate(" + vAxis.offset.left + ", 0)");
+            .attr("transform", "translate(" + chart.offsets.left + ", 0)");
     }
     chartStructure.verticalAxisGroup.selectAll("*").remove();
     const verticalAxis = d3.axisLeft(chart.verticalScale);
